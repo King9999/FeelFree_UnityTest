@@ -21,14 +21,14 @@ public class GameManager : MonoBehaviour
 
         //icon object set up. Each one is instantiated and given random scriptable object data
         iconObjects = new GameObject[MaxIconObjects];
-        Vector3 iconPos = Vector3.zero;
-        SpriteRenderer menuSr = inventory.GetComponent<SpriteRenderer>();   //need this to position the icons
-        float xOffset = 1.5f;
-        float yOffset = -1f;
-        float xBounds = menuSr.bounds.min.x;
-        float yBounds = menuSr.bounds.max.y;
+        //Vector3 iconPos = Vector3.zero;
+        //SpriteRenderer menuSr = inventory.GetComponent<SpriteRenderer>();   //need this to position the icons
+        //float xOffset = 1.5f;
+        //float yOffset = -1f;
+       // float xBounds = menuSr.bounds.min.x;
+        //float yBounds = menuSr.bounds.max.y;
 
-        Random.InitState(1001);
+        //Random.InitState(1001);
 
         for (int i = 0; i < iconObjects.Length; i++)
         {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             tm.text = im.icons[randIcon].iconName;
 
             //search for an empty space in inventory and place item there.
-            int randSpace = Random.Range(0, inventory.inventorySpace.Length);
+            int randSpace = Random.Range(0, inventory.isOccupied.Length);
 
             while(inventory.isOccupied[randSpace] == true)
             {

@@ -13,14 +13,14 @@ public class Menu : MonoBehaviour
     {
         //menu starts empty. If I can't get around the errors that will result from empty indexes, I can try inserting an empty gameobject.
         //inventorySpace = new GameObject[MaxRows, MaxCols];
-
+        isOccupied = new bool[inventorySpace.Length];
     }
     // Start is called before the first frame update
     void Start()
     {
         //menu starts empty. If I can't get around the errors that will result from empty indexes, I can try inserting an empty gameobject.
         //inventorySpace = new GameObject[MaxRows, MaxCols];
-        isOccupied = new bool[inventorySpace.Length];
+        //isOccupied = new bool[inventorySpace.Length];
     
 
     }
