@@ -6,16 +6,17 @@ using TMPro;
 /* This script will create 5 icon game objects at runtime using a single prefab. The icons are scriptable objects. */
 public class IconManager : MonoBehaviour
 {
-    int MaxIconObjects {get;} = 5;
+    //int MaxIconObjects {get;} = 5;
     public Icon[] icons;     //55 total
-    public GameObject[] iconObjects;
-    public GameObject iconPrefab;
+    //public GameObject[] iconObjects;
+    //public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
+    public static IconManager instance;
 
     // Start is called before the first frame update
     void Start()
     {
         //icon object set up. Each one is instantiated and given random scriptable object data
-        iconObjects = new GameObject[MaxIconObjects];
+        /*iconObjects = new GameObject[MaxIconObjects];
         Vector3 iconPos = Vector3.zero;
 
         for (int i = 0; i < iconObjects.Length; i++)
@@ -31,9 +32,20 @@ public class IconManager : MonoBehaviour
             tm.text = icons[randIcon].iconName;
 
             iconPos = new Vector3(iconPos.x + 1, iconPos.y, iconPos.z);
-        }
+        }*/
         //SpriteRenderer sr = GetComponent<SpriteRenderer>();
         //sr.sprite = icon[0].iconImage;
+    }
+
+    void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);    //Only want one instance of icon manager
+            return;
+        }
+
+        instance = this;
     }
 
     // Update is called once per frame

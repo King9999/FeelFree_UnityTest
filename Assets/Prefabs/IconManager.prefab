@@ -46,5 +46,6 @@ MonoBehaviour:
   icons:
   - {fileID: 11400000, guid: b4c0e88902f5e6f4b8041bb3a1772a83, type: 2}
   - {fileID: 11400000, guid: db06e3b6c91b01b4b97dfc6a20799baa, type: 2}
+  - {fileID: 11400000, guid: 3f570725bccc8994a90a6fadf3e9e8d4, type: 2}
   iconObjects: []
   iconPrefab: {fileID: 3854762151297263177, guid: ac9121fa30c594f4daba18c79678e6f9, type: 3}
