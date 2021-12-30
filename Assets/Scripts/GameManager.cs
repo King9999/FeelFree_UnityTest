@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] iconObjects;
     int MaxIconObjects {get;} = 5;
     public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
+
+    public Menu inventory;
     public IconManager im = IconManager.instance;       //this must be public 
 
     // Start is called before the first frame update
@@ -25,10 +27,12 @@ public class GameManager : MonoBehaviour
             int randIcon = Random.Range(0, im.icons.Length);
             SpriteRenderer sr = iconObjects[i].GetComponent<SpriteRenderer>();
             sr.sprite = im.icons[randIcon].iconImage;
+            sr.sortingOrder = 1;      //icons should appear above the menu sprite.
 
             TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
             tm.text = im.icons[randIcon].iconName;
 
+            //TODO: place the icon objects into a random position in the inventory
             iconPos = new Vector3(iconPos.x + 1, iconPos.y, iconPos.z);
         }
     }
