@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
     public Menu inventory;
+    public Cursor cursor;
     public IconManager im = IconManager.instance;       //this must be public 
 
     // Start is called before the first frame update
     void Start()
     {
+        //cursor begins at the first position.
+        cursor.transform.position = inventory.inventorySpace[0].transform.position;
+
         //icon object set up. Each one is instantiated and given random scriptable object data
         iconObjects = new GameObject[MaxIconObjects];
         Vector3 iconPos = Vector3.zero;
@@ -39,17 +43,21 @@ public class GameManager : MonoBehaviour
             TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
             tm.text = im.icons[randIcon].iconName;
 
-            //TODO: place the icon objects into a random position in the inventory
-            //iconPos = new Vector3(iconPos.x + 1, iconPos.y, iconPos.z);
-            int randRow = Random.Range(0, inventory.MaxRows);
-            int randCol = Random.Range(0, inventory.MaxCols);
-            inventory.inventorySpace[randRow, randCol] = iconObjects[i];
+            //search for an empty space in inventory and place item there.
+            int randSpace = Random.Range(0, inventory.inventorySpace.Length);
 
-            iconObjects[i].transform.position = new Vector3(xBounds + (float)randCol + xOffset, yBounds - (float)randRow + yOffset, iconObjects[i].transform.position.z);
+            while(inventory.isOccupied[randSpace] == true)
+            {
+                randSpace = Random.Range(0, inventory.inventorySpace.Length);
+            }
+            iconObjects[i].transform.position = inventory.inventorySpace[randSpace].transform.position;
+            inventory.isOccupied[randSpace] = true;
+
+            //iconObjects[i].transform.position = new Vector3(xBounds + (float)randCol + xOffset, yBounds - (float)randRow + yOffset, iconObjects[i].transform.position.z);
         }
 
         /*******displays item position in console.*****/
-        string menuString = "Icon Locations (A = icon)\n";
+        /*string menuString = "Icon Locations (A = icon)\n";
         for (int i = 0; i < inventory.MaxRows; i++)
         {
             menuString += "[";
@@ -64,7 +72,7 @@ public class GameManager : MonoBehaviour
             menuString += "]\n";
         }
 
-        Debug.Log(menuString);
+        Debug.Log(menuString);*/
         /******************************/
     }
 
