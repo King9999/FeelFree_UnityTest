@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
+  m_Name: Poison Arrow
+  m_EditorClassIdentifier: 
+  iconName: Poison Arrow
+  iconImage: {fileID: 21300000, guid: 519fd0818f69b6142b2089d56ef86f34, type: 3}
