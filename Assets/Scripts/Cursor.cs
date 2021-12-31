@@ -57,7 +57,12 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            //jump ahead 6 spaces in the array to get to the intended space
+            //If cursor is in top row (the first 6 positions in array), add number of columns * 2 to position.
+            //otherwise, subtract number of columns from position.
+            if (currentPosition < menu.MaxCols)
+                currentPosition += menu.MaxCols * 2;
+            else
+                currentPosition -= menu.MaxCols;
             Debug.Log("Moving Up");
         }
 
@@ -67,7 +72,12 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            //move back 6 spaces in the array to get to the intended space
+            //If cursor is in bottom row (the last 6 positions in array), subtract number of columns * 2 from position.
+            //otherwise, add number of columns to position.
+            if (currentPosition >= menu.MaxCols * 2)
+                currentPosition -= menu.MaxCols * 2;
+            else
+                currentPosition += menu.MaxCols;
             Debug.Log("Moving Down");
         }
     }
