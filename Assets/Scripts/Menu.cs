@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Menu : MonoBehaviour
     public bool[] isOccupied;               //if true, an item is in this space.
     public int MaxRows {get;} = 3;
     public int MaxCols {get;} = 6;
+
+    [Header("UI")]
+    public TextMeshProUGUI menuTitle;
+    public TextMeshProUGUI itemName;        //names of icons
 
     void Awake()
     {

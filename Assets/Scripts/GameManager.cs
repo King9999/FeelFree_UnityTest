@@ -21,12 +21,6 @@ public class GameManager : MonoBehaviour
 
         //icon object set up. Each one is instantiated and given random scriptable object data
         iconObjects = new GameObject[MaxIconObjects];
-        //Vector3 iconPos = Vector3.zero;
-        //SpriteRenderer menuSr = inventory.GetComponent<SpriteRenderer>();   //need this to position the icons
-        //float xOffset = 1.5f;
-        //float yOffset = -1f;
-       // float xBounds = menuSr.bounds.min.x;
-        //float yBounds = menuSr.bounds.max.y;
 
         //Random.InitState(1001);
 
@@ -40,8 +34,8 @@ public class GameManager : MonoBehaviour
             sr.sprite = im.icons[randIcon].iconImage;
             sr.sortingOrder = 1;      //icons should appear above the menu sprite.
 
-            TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
-            tm.text = im.icons[randIcon].iconName;
+            //TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
+            //tm.text = im.icons[randIcon].iconName;
 
             //search for an empty space in inventory and place item there.
             int randSpace = Random.Range(0, inventory.isOccupied.Length);
@@ -53,7 +47,6 @@ public class GameManager : MonoBehaviour
             iconObjects[i].transform.position = inventory.inventorySpace[randSpace].transform.position;
             inventory.isOccupied[randSpace] = true;
 
-            //iconObjects[i].transform.position = new Vector3(xBounds + (float)randCol + xOffset, yBounds - (float)randRow + yOffset, iconObjects[i].transform.position.z);
         }
 
         /*******displays item position in console.*****/
