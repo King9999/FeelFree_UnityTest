@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //update cursor position
+        cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
     }
 }
