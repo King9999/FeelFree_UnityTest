@@ -9,11 +9,8 @@ public class Cursor : MonoBehaviour
     public Menu menu;               //need this to get reference to menu space and any items in that space.
     public int currentPosition;    //menu array index of where the cursor is located.
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameManager gm = GameManager.instance;
+
 
     // Update is called once per frame
     void Update()
@@ -79,6 +76,27 @@ public class Cursor : MonoBehaviour
             else
                 currentPosition += menu.MaxCols;
             Debug.Log("Moving Down");
+        }
+    }
+
+    //NOTE: This method has a different function if an item is currently being held with the A button.
+    public void ResetInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            //replace the current 5 items in inventory with new ones
+            int i = 0;
+            if (gm == null)
+            {
+                Debug.Log("GM instance is null");
+                return;
+            }
+            while (i < gm.MaxIconObjects)
+            {
+                Destroy(gm.iconObjects[gm.iconObjects.Length - 1]);
+                i++;
+            }
+            Debug.Log("Inventory Reset");
         }
     }
 }

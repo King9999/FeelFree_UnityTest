@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Select Icon",
+                    "name": "Reset",
                     "type": "Button",
                     "id": "6321e416-4b5d-4397-8704-74f70c35a6eb",
                     "expectedControlType": "Button",
@@ -46,9 +46,25 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Change Resolution",
+                    "name": "Change Resolution L",
                     "type": "Button",
                     "id": "585915d0-d4f7-4d6b-a0cb-2ad758df54d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Change Resolution R",
+                    "type": "Button",
+                    "id": "8dc56bcd-9b3a-44c0-88fc-8e13e7e16f65",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Select Icon",
+                    "type": "Button",
+                    "id": "b9222150-bcbc-4403-8d65-d037380b2112",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -146,7 +162,29 @@
                 {
                     "name": "",
                     "id": "7d4ed546-5809-44d7-8ffa-cf6561d864a0",
-                    "path": "",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "867f9332-ab5a-430b-9a60-2202e9f67c47",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Change Resolution L",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b8b4bd7f-fe1c-4ef0-ad56-7db00042bc32",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -156,12 +194,12 @@
                 },
                 {
                     "name": "",
-                    "id": "867f9332-ab5a-430b-9a60-2202e9f67c47",
-                    "path": "",
+                    "id": "5d10eb7a-3bb3-4fa3-b575-b12bf37755ff",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Change Resolution",
+                    "action": "Change Resolution R",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

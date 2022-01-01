@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 0}
   currentPosition: 0
+  gm: {fileID: 0}
 --- !u!114 &2092671923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,13 +189,33 @@ MonoBehaviour:
     m_ActionId: e225b17e-a1e4-4480-8de4-c548cdb16561
     m_ActionName: Cursor Control/Right
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3404189384081784182}
+        m_TargetAssemblyTypeName: Cursor, Assembly-CSharp
+        m_MethodName: ResetInventory
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6321e416-4b5d-4397-8704-74f70c35a6eb
     m_ActionName: Cursor Control/Select Icon
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 585915d0-d4f7-4d6b-a0cb-2ad758df54d8
     m_ActionName: Cursor Control/Change Resolution
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8dc56bcd-9b3a-44c0-88fc-8e13e7e16f65
+    m_ActionName: Cursor Control/Change Resolution R[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b9222150-bcbc-4403-8d65-d037380b2112
+    m_ActionName: Cursor Control/Select Icon[/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Cursor Control
