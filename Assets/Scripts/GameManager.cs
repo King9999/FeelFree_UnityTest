@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
             sr.sprite = im.icons[randIcon].iconImage;
             sr.sortingOrder = 1;      //icons should appear above the menu sprite.
 
-            //TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
-            //tm.text = im.icons[randIcon].iconName;
+            TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
+            tm.text = im.icons[randIcon].iconName;
 
             //search for an empty space in inventory and place item there.
             int randSpace = Random.Range(0, inventory.isOccupied.Length);
@@ -74,5 +74,23 @@ public class GameManager : MonoBehaviour
     {
         //update cursor position
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
+
+        //check if cursor is on an item
+        bool foundItem = false;
+        int i = 0;
+        while (!foundItem && i < iconObjects.Length)
+        {
+            if (cursor.transform.position == iconObjects[i].transform.position)
+            {
+                TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
+                inventory.itemName.text = tm.text;
+                foundItem = true;
+            }
+            else
+            {
+                i++;
+                inventory.itemName.text = "";
+            }
+        }
     }
 }
