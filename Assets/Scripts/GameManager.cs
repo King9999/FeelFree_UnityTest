@@ -6,14 +6,14 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] iconObjects;
+    bool iconObjectsInstantiated;
     public int MaxIconObjects {get;} = 5;
     public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
     public Menu inventory;
     public Cursor cursor;
     Vector3 lastCursorPosition;         //tracks cursor's previous position. Used to check if icon text needs to update.
-    public IconManager im = IconManager.instance;       //this must be public
-
+    public IconManager im = IconManager.instance; 
     public static GameManager instance;
 
     void Awake()
@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //cursor begins at the first position.
+        //cursor begins at the first position, which is the top left corner of inventory.
         cursor.transform.position = inventory.inventorySpace[0].transform.position;
         lastCursorPosition = cursor.transform.position;
 
@@ -43,8 +43,10 @@ public class GameManager : MonoBehaviour
         {
             iconObjects[i] = Instantiate(iconPrefab);
 
+            ResetIconObject(iconObjects[i], im.icons);
+
             //get random scriptable object data
-            int randIcon = Random.Range(0, im.icons.Length);
+            /*int randIcon = Random.Range(0, im.icons.Length);
             SpriteRenderer sr = iconObjects[i].GetComponent<SpriteRenderer>();
             sr.sprite = im.icons[randIcon].iconImage;
             sr.sortingOrder = 1;      //icons should appear above the menu sprite.
@@ -57,10 +59,10 @@ public class GameManager : MonoBehaviour
 
             while(inventory.isOccupied[randSpace] == true)
             {
-                randSpace = Random.Range(0, inventory.inventorySpace.Length);
+                randSpace = Random.Range(0, inventory.isOccupied.Length);
             }
             iconObjects[i].transform.position = inventory.inventorySpace[randSpace].transform.position;
-            inventory.isOccupied[randSpace] = true;
+            inventory.isOccupied[randSpace] = true;*/
 
         }
 
@@ -83,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    string GetItemNameOnCursor(Vector3 currentCursorPosition)
+    public string GetItemNameOnCursor(Vector3 currentCursorPosition)
     {
         bool foundItem = false;
         int i = 0;
@@ -103,5 +105,35 @@ public class GameManager : MonoBehaviour
         }
 
         return itemName;
+    }
+
+    //Replace an icon game object with a new icon and place it at a random location. Note that
+    //no existing objects are deleted to prevent potential garbage collection.
+    public void ResetIconObject(GameObject iconObject, Icon[] icons)
+    {
+        //reset inventory
+        //inventory.isOccupied = new bool[inventory.inventorySpace.Length];
+
+        //get random scriptable object data
+        int randIcon = Random.Range(0, icons.Length);
+        SpriteRenderer sr = iconObject.GetComponent<SpriteRenderer>();
+        sr.sprite = icons[randIcon].iconImage;
+        sr.sortingOrder = 1;      //icons should appear above the menu sprite.
+
+        TextMeshProUGUI tm = iconObject.GetComponentInChildren<TextMeshProUGUI>();
+        tm.text = icons[randIcon].iconName;
+
+        //search for an empty space in inventory and place item there.
+        int randSpace = Random.Range(0, inventory.isOccupied.Length);
+
+        while(inventory.isOccupied[randSpace] == true)
+        {
+            randSpace = Random.Range(0, inventory.isOccupied.Length);
+        }
+        iconObject.transform.position = inventory.inventorySpace[randSpace].transform.position;
+        inventory.isOccupied[randSpace] = true;
+
+        //get name of item at current cursor's location in case it changed
+        //inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
     }
 }

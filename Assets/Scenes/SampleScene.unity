@@ -337,7 +337,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1501803234 stripped
 MonoBehaviour:
@@ -370,7 +370,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3205760016080466696, guid: b4a4a83bc8e3f4045a692145dd3fba0c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3205760016080466696, guid: b4a4a83bc8e3f4045a692145dd3fba0c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -518,6 +518,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4524715459384719639, guid: a09501670d1157b418b46c22d3beba19, type: 3}
+      propertyPath: m_PixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7788154118325006881, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -531,61 +535,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
-      value: 8dc56bcd-9b3a-44c0-88fc-8e13e7e16f65
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
-      value: b9222150-bcbc-4403-8d65-d037380b2112
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: Cursor Control/Change Resolution R[/XInputControllerWindows/rightShoulder]
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
-      value: Cursor Control/Select Icon[/XInputControllerWindows/buttonSouth]
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+    - target: {fileID: 3404189384081784182, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
+      propertyPath: gm
       value: 
-      objectReference: {fileID: 772169991}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ResetInventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Cursor, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2092671923, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1168349205}
     - target: {fileID: 3404189384081784182, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
       propertyPath: menu
       value: 
       objectReference: {fileID: 1534665989}
     - target: {fileID: 4022556664858566300, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4022556664858566300, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
       propertyPath: m_LocalPosition.x

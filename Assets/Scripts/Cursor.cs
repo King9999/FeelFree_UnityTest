@@ -84,18 +84,21 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
+            //reset inventory space
+            /*for (int i = 0; i < gm.inventory.isOccupied.Length; i++)
+            {
+                gm.inventory.isOccupied[i] = false;
+            }*/
+            gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
+
             //replace the current 5 items in inventory with new ones
-            int i = 0;
-            if (gm == null)
+            foreach (GameObject icon in gm.iconObjects)
             {
-                Debug.Log("GM instance is null");
-                return;
+                gm.ResetIconObject(icon, IconManager.instance.icons);
             }
-            while (i < gm.MaxIconObjects)
-            {
-                Destroy(gm.iconObjects[gm.iconObjects.Length - 1]);
-                i++;
-            }
+
+            //Update item name on cursor since items have changed.
+            gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
             Debug.Log("Inventory Reset");
         }
     }
