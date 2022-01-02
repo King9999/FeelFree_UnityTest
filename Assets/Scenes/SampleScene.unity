@@ -571,6 +571,18 @@ PrefabInstance:
       propertyPath: menu
       value: 
       objectReference: {fileID: 1534665989}
+    - target: {fileID: 3849361777438352221, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849361777438352221, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849361777438352221, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4022556664858566300, guid: 747d271e375b9654bbd15c0e2a321712, type: 3}
       propertyPath: m_RootOrder
       value: 4

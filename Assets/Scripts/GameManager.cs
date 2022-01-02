@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         string itemName = "";
         while (!foundItem && i < iconObjects.Length)
         {
-            if (currentCursorPosition == iconObjects[i].transform.position)
+            if (iconObjects[i].activeSelf && currentCursorPosition == iconObjects[i].transform.position)
             {
                 TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
                 itemName = tm.text;
@@ -120,7 +120,9 @@ public class GameManager : MonoBehaviour
     //no existing objects are deleted to prevent potential garbage collection.
     public void ResetIconObject(GameObject iconObject, Icon[] icons)
     {
-        
+        //enable object in case it was deactivated.
+        iconObject.SetActive(true);
+
         //get random scriptable object data
         int randIcon = Random.Range(0, icons.Length);
         SpriteRenderer sr = iconObject.GetComponent<SpriteRenderer>();

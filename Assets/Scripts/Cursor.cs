@@ -6,17 +6,17 @@ using UnityEngine.InputSystem;
 //the cursor is controllable, and should have input to handle its movement and cursor selection.
 public class Cursor : MonoBehaviour
 {
-    public Menu menu;               //need this to get reference to menu space and any items in that space.
-    public int currentPosition;    //menu array index of where the cursor is located.
-    public bool itemPickedUp;              //changes the behaviour of the ResetInventory method if true.
-    public Vector3 heldItemPosition;       //location of item to be moved.
-    public GameObject heldItem;
-    public int heldItemIndex;       //location of a held item in iconObjects array.
-    bool cursorBlinking;            //if true, will run the Blink coroutine
-    bool coroutineRunning;
+    public Menu menu;                                //this is used to access Menu variables for moving the cursor.
+    public int currentPosition;                     //menu array index of where the cursor is located.
+    public bool itemPickedUp;                       //changes the behaviour of the ResetInventory method if true.
+    [HideInInspector]public int heldItemIndex;       //location of a held item in iconObjects array.
+    bool cursorBlinking;                            //if true, will run the Blink coroutine
+    bool coroutineRunning;                          //ensures the Blink coroutine runs once per frame
+
+    SpriteRenderer cursorSr;                        //used with Blink coroutine.
 
     public GameManager gm = GameManager.instance;
-    SpriteRenderer cursorSr;        //used with Blink coroutine.
+
 
     void Start()
     {
@@ -107,8 +107,11 @@ public class Cursor : MonoBehaviour
         {
             if (itemPickedUp)
             {
-                //remove icon 
+                //remove icon
+                gm.iconObjects[heldItemIndex].SetActive(false);
                 itemPickedUp = false;
+                cursorBlinking = false;
+                gm.inventory.itemName.text = "";
                 Debug.Log("Item Destroyed");
             }
             else
@@ -135,30 +138,33 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            if (!itemPickedUp && gm.inventory.isOccupied[currentPosition])
+            if (!itemPickedUp /*&& gm.inventory.isOccupied[currentPosition]*/)
             {
-                itemPickedUp = true;
-                gm.inventory.isOccupied[currentPosition] = false;
-                Debug.Log("Item Picked Up");
-
-                //cursor will blink when item is selected
-                cursorBlinking = true;
-
-                //find the item to be picked up
-                int i = 0;
-                bool itemFound = false;
-                while(!itemFound && i < gm.iconObjects.Length)
+                if (gm.inventory.isOccupied[currentPosition])
                 {
-                    if (gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                    itemPickedUp = true;
+                    gm.inventory.isOccupied[currentPosition] = false;
+                    Debug.Log("Item Picked Up");
+
+                    //cursor will blink when item is selected
+                    cursorBlinking = true;
+
+                    //find the item to be picked up
+                    int i = 0;
+                    bool itemFound = false;
+                    while(!itemFound && i < gm.iconObjects.Length)
                     {
-                        //found item. Record its array index.
-                        heldItemIndex = i;
-                        itemFound = true;
-                        Debug.Log("Picked Up " + gm.inventory.itemName.text);
-                    }
-                    else
-                    {
-                        i++;
+                        if (gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                        {
+                            //found item. Record its array index.
+                            heldItemIndex = i;
+                            itemFound = true;
+                            Debug.Log("Picked Up " + gm.inventory.itemName.text);
+                        }
+                        else
+                        {
+                            i++;
+                        }
                     }
                 }
             }
