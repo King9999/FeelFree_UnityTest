@@ -12,14 +12,32 @@ public class Cursor : MonoBehaviour
     public Vector3 heldItemPosition;       //location of item to be moved.
     public GameObject heldItem;
     public int heldItemIndex;       //location of a held item in iconObjects array.
+    bool cursorBlinking;            //if true, will run the Blink coroutine
+    bool coroutineRunning;
 
     public GameManager gm = GameManager.instance;
+    SpriteRenderer cursorSr;        //used with Blink coroutine.
 
+    void Start()
+    {
+        cursorSr = GetComponent<SpriteRenderer>();
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //update cursor's position in menu
+        if (cursorBlinking)
+        {
+            if (!coroutineRunning)
+            {
+                coroutineRunning = true;
+                StartCoroutine(Blink());
+            }
+        }
+        else
+        {
+            cursorSr.enabled = true;    //ensures that cursor sprite is enabled when coroutine stops
+        }
     }
 
     public void MoveLeft(InputAction.CallbackContext context)
@@ -31,7 +49,6 @@ public class Cursor : MonoBehaviour
                 currentPosition += menu.MaxCols - 1;
             else
                 currentPosition -= 1;
-            //currentPosition = currentPosition - 1 < 0 ? currentPosition + menu.MaxCols - 1 : currentPosition - 1;
             Debug.Log("Moving Left");
         }
 
@@ -124,7 +141,10 @@ public class Cursor : MonoBehaviour
                 gm.inventory.isOccupied[currentPosition] = false;
                 Debug.Log("Item Picked Up");
 
-                //remove the item
+                //cursor will blink when item is selected
+                cursorBlinking = true;
+
+                //find the item to be picked up
                 int i = 0;
                 bool itemFound = false;
                 while(!itemFound && i < gm.iconObjects.Length)
@@ -149,13 +169,25 @@ public class Cursor : MonoBehaviour
                 if (gm.inventory.isOccupied[currentPosition])
                 {
                     //pick up item and replace with previously held item
+                    Debug.Log("Items Swapped");
                 }
                 else
                 {
                     itemPickedUp = false;
                     gm.inventory.isOccupied[currentPosition] = true;
+                    cursorBlinking = false;
+                    gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
+                    Debug.Log("Item Dropped");
                 }
             } 
         }
+    }
+
+    //cursor will rapidly turn on and off when item is selected.
+    IEnumerator Blink()
+    {
+        cursorSr.enabled = !cursorSr.enabled;
+        yield return new WaitForSeconds(0.1f);
+        coroutineRunning = false;
     }
 }
