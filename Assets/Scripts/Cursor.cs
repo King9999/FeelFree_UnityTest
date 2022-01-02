@@ -8,6 +8,10 @@ public class Cursor : MonoBehaviour
 {
     public Menu menu;               //need this to get reference to menu space and any items in that space.
     public int currentPosition;    //menu array index of where the cursor is located.
+    public bool itemPickedUp;              //changes the behaviour of the ResetInventory method if true.
+    public Vector3 heldItemPosition;       //location of item to be moved.
+    public GameObject heldItem;
+    public int heldItemIndex;       //location of a held item in iconObjects array.
 
     public GameManager gm = GameManager.instance;
 
@@ -84,22 +88,74 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            //reset inventory space
-            /*for (int i = 0; i < gm.inventory.isOccupied.Length; i++)
+            if (itemPickedUp)
             {
-                gm.inventory.isOccupied[i] = false;
-            }*/
-            gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
-
-            //replace the current 5 items in inventory with new ones
-            foreach (GameObject icon in gm.iconObjects)
-            {
-                gm.ResetIconObject(icon, IconManager.instance.icons);
+                //remove icon 
+                itemPickedUp = false;
+                Debug.Log("Item Destroyed");
             }
+            else
+            {
+                //reset inventory space
+                gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
 
-            //Update item name on cursor since items have changed.
-            gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
-            Debug.Log("Inventory Reset");
+                //replace the current 5 items in inventory with new ones
+                foreach (GameObject icon in gm.iconObjects)
+                {
+                    gm.ResetIconObject(icon, IconManager.instance.icons);
+                }
+
+                //Update item name on cursor since items have changed.
+                gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
+                Debug.Log("Inventory Reset");
+            }
+        }
+    }
+
+    //Pick up an item. Pressing the same button puts the item down. Pressing the Y button while
+    //an item is picked up destroys the item.
+    public void SelectIcon(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            if (!itemPickedUp && gm.inventory.isOccupied[currentPosition])
+            {
+                itemPickedUp = true;
+                gm.inventory.isOccupied[currentPosition] = false;
+                Debug.Log("Item Picked Up");
+
+                //remove the item
+                int i = 0;
+                bool itemFound = false;
+                while(!itemFound && i < gm.iconObjects.Length)
+                {
+                    if (gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                    {
+                        //found item. Record its array index.
+                        heldItemIndex = i;
+                        itemFound = true;
+                        Debug.Log("Picked Up " + gm.inventory.itemName.text);
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+            }
+            else
+            {
+                //drop item in new space
+                //check if space already occupied. If so, pick up the new item, and old item is placed in space.
+                if (gm.inventory.isOccupied[currentPosition])
+                {
+                    //pick up item and replace with previously held item
+                }
+                else
+                {
+                    itemPickedUp = false;
+                    gm.inventory.isOccupied[currentPosition] = true;
+                }
+            } 
         }
     }
 }

@@ -77,11 +77,20 @@ public class GameManager : MonoBehaviour
         //update cursor position         
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
 
+      
+
         //whenever cursor moves, need to check if cursor is on an item
         if (lastCursorPosition != cursor.transform.position)
         {
             lastCursorPosition = cursor.transform.position;
             inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
+
+            //was an item picked up?
+            if (cursor.itemPickedUp)
+            {
+                //update held item's position.
+                iconObjects[cursor.heldItemIndex].transform.position = cursor.transform.position;
+            }
         }
     }
 
@@ -111,9 +120,7 @@ public class GameManager : MonoBehaviour
     //no existing objects are deleted to prevent potential garbage collection.
     public void ResetIconObject(GameObject iconObject, Icon[] icons)
     {
-        //reset inventory
-        //inventory.isOccupied = new bool[inventory.inventorySpace.Length];
-
+        
         //get random scriptable object data
         int randIcon = Random.Range(0, icons.Length);
         SpriteRenderer sr = iconObject.GetComponent<SpriteRenderer>();
