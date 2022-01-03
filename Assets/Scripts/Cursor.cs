@@ -26,6 +26,7 @@ public class Cursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /******Blink coroutine operation*****/
         if (cursorBlinking)
         {
             if (!coroutineRunning)
@@ -38,6 +39,9 @@ public class Cursor : MonoBehaviour
         {
             cursorSr.enabled = true;    //ensures that cursor sprite is enabled when coroutine stops
         }
+        /**********************************/
+
+
     }
 
     public void MoveLeft(InputAction.CallbackContext context)
@@ -111,7 +115,7 @@ public class Cursor : MonoBehaviour
                 gm.iconObjects[heldItemIndex].SetActive(false);
                 itemPickedUp = false;
                 cursorBlinking = false;
-                gm.inventory.itemName.text = "";
+                //gm.inventory.itemName.text = "";
                 Debug.Log("Item Destroyed");
             }
             else
@@ -154,7 +158,7 @@ public class Cursor : MonoBehaviour
                     bool itemFound = false;
                     while(!itemFound && i < gm.iconObjects.Length)
                     {
-                        if (gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                        if (gm.iconObjects[i].activeSelf && gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
                         {
                             //found item. Record its array index.
                             heldItemIndex = i;

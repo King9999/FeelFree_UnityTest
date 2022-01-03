@@ -1,0 +1,3 @@
+BUG TO DO LIST
+----
+1. When a held item overlaps with another item, if the held item is destroyed, the other item can't be selected. *SOLVED*
