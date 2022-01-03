@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     bool iconObjectsInstantiated;
     bool foundItem;                     //if true, cursor is resting on an item.
     int foundItemIndex;                 //used with Pulse couroutine
-    bool pulseCoroutineOn;       
+         
     public int MaxIconObjects {get;} = 5;
     public IconObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     Vector3 lastCursorPosition;         //tracks cursor's previous position. Used to check if icon text needs to update.
     public IconManager im = IconManager.instance; 
     public static GameManager instance;
+
+    //coroutine bools
+    bool pulseCoroutineOn;
+    bool animateTextCoroutineOn;
 
     void Awake()
     {
@@ -46,30 +50,10 @@ public class GameManager : MonoBehaviour
             iconObjects[i] = Instantiate(iconPrefab);
 
             ResetIconObject(iconObjects[i], im.icons);
-
-            //get random scriptable object data
-            /*int randIcon = Random.Range(0, im.icons.Length);
-            SpriteRenderer sr = iconObjects[i].GetComponent<SpriteRenderer>();
-            sr.sprite = im.icons[randIcon].iconImage;
-            sr.sortingOrder = 1;      //icons should appear above the menu sprite.
-
-            TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
-            tm.text = im.icons[randIcon].iconName;
-
-            //search for an empty space in inventory and place item there.
-            int randSpace = Random.Range(0, inventory.isOccupied.Length);
-
-            while(inventory.isOccupied[randSpace] == true)
-            {
-                randSpace = Random.Range(0, inventory.isOccupied.Length);
-            }
-            iconObjects[i].transform.position = inventory.inventorySpace[randSpace].transform.position;
-            inventory.isOccupied[randSpace] = true;*/
-
         }
 
         //get name of item at current cursor's location
-        /*inventory.itemName.text =*/ GetItemNameOnCursor(cursor.transform.position);
+        GetItemNameOnCursor(cursor.transform.position);
 
     }
 
@@ -85,7 +69,7 @@ public class GameManager : MonoBehaviour
         if (lastCursorPosition != cursor.transform.position)
         {
             lastCursorPosition = cursor.transform.position;
-            /*inventory.itemName.text =*/ GetItemNameOnCursor(cursor.transform.position);
+            GetItemNameOnCursor(cursor.transform.position);
 
             //was an item picked up?
             if (cursor.itemPickedUp)
@@ -119,20 +103,17 @@ public class GameManager : MonoBehaviour
         {
             if (iconObjects[i].gameObject.activeSelf && currentCursorPosition == iconObjects[i].transform.position)
             {
-                //TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
                 inventory.itemName.text = iconObjects[i].iconName.text;
                 inventory.itemDescription.text = iconObjects[i].iconDescription.text;
+                StartCoroutine(AnimateText(inventory.itemDescription.text));
                 foundItem = true;
                 foundItemIndex = i;
             }
             else
             {
                 i++;
-                foundItem = false;
             }
         }
-
-        //return itemName;
     }
 
     //Replace an icon game object with a new icon and place it at a random location. Note that
@@ -161,10 +142,9 @@ public class GameManager : MonoBehaviour
         iconObject.transform.position = inventory.inventorySpace[randSpace].transform.position;
         inventory.isOccupied[randSpace] = true;
 
-        //get name of item at current cursor's location in case it changed
-        //inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
     }
 
+#region Coroutines
     //This coroutine will increase and decrease an object's scale while the cursor is resting on it.
     IEnumerator Pulse(IconObject icon)
     {
@@ -181,4 +161,13 @@ public class GameManager : MonoBehaviour
         pulseCoroutineOn = false;
         icon.transform.localScale = new Vector3(1, 1, icon.transform.localScale.z);
     }
+
+    //Displays given text one letter at a time. Should not run again once the text is fully displayed.
+    IEnumerator AnimateText(string text)
+    {
+        string copy = text;
+        text = "";
+        yield return null;
+    }
+#endregion
 }
