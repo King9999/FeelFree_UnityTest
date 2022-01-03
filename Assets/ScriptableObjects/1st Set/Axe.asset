@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   iconName: Axe
+  description: For chopping wood or bodies
   iconImage: {fileID: 21300000, guid: 56c3a644e8d2d284992c9951c4b4e590, type: 3}

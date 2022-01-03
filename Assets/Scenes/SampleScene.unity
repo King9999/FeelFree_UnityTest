@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconObjects: []
-  iconPrefab: {fileID: 3854762151297263177, guid: ac9121fa30c594f4daba18c79678e6f9, type: 3}
+  iconPrefab: {fileID: 4689620647304965907, guid: ac9121fa30c594f4daba18c79678e6f9, type: 3}
   inventory: {fileID: 1534665989}
   cursor: {fileID: 772169991}
   im: {fileID: 1501803234}
@@ -517,10 +517,6 @@ PrefabInstance:
     - target: {fileID: 2120567149908856920, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4524715459384719639, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_PixelPerfect
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788154118325006881, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_Name

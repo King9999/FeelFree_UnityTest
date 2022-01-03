@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   iconName: Bow
+  description: Useless without arrows
   iconImage: {fileID: 21300000, guid: 0afaa15b4dc6b9048b80e9be35def395, type: 3}

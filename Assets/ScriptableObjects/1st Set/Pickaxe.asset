@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   iconName: Pickaxe
+  description: Mining tool
   iconImage: {fileID: 21300000, guid: 9e8b6626c417dfc429a2181587a38025, type: 3}

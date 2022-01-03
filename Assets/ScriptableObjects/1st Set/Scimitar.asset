@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Scimitar
   m_EditorClassIdentifier: 
   iconName: Scimitar
+  description: Curved sword for slicing
   iconImage: {fileID: 21300000, guid: df98aa4305c33e240bed4bb5414939f5, type: 3}

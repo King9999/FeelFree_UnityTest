@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Spear
   m_EditorClassIdentifier: 
   iconName: Spear
+  description: For midrange combat
   iconImage: {fileID: 21300000, guid: e3ff35e870ed9d842a0c25c984ff3f2d, type: 3}

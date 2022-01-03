@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -112,7 +111,7 @@ public class Cursor : MonoBehaviour
             if (itemPickedUp)
             {
                 //remove icon
-                gm.iconObjects[heldItemIndex].SetActive(false);
+                gm.iconObjects[heldItemIndex].gameObject.SetActive(false);
                 itemPickedUp = false;
                 cursorBlinking = false;
                 //gm.inventory.itemName.text = "";
@@ -124,13 +123,13 @@ public class Cursor : MonoBehaviour
                 gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
 
                 //replace the current 5 items in inventory with new ones
-                foreach (GameObject icon in gm.iconObjects)
+                foreach (IconObject icon in gm.iconObjects)
                 {
                     gm.ResetIconObject(icon, IconManager.instance.icons);
                 }
 
                 //Update item name on cursor since items have changed.
-                gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
+                /*gm.inventory.itemName.text =*/ gm.GetItemNameOnCursor(transform.position);
                 Debug.Log("Inventory Reset");
             }
         }
@@ -158,7 +157,7 @@ public class Cursor : MonoBehaviour
                     bool itemFound = false;
                     while(!itemFound && i < gm.iconObjects.Length)
                     {
-                        if (gm.iconObjects[i].activeSelf && gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                        if (gm.iconObjects[i].gameObject.activeSelf && gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
                         {
                             //found item. Record its array index.
                             heldItemIndex = i;
@@ -186,7 +185,7 @@ public class Cursor : MonoBehaviour
                     itemPickedUp = false;
                     gm.inventory.isOccupied[currentPosition] = true;
                     cursorBlinking = false;
-                    gm.inventory.itemName.text = gm.GetItemNameOnCursor(transform.position);
+                    gm.GetItemNameOnCursor(transform.position);
                     Debug.Log("Item Dropped");
                 }
             } 

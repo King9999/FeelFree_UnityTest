@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -13,6 +11,7 @@ public class Menu : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI menuTitle;
     public TextMeshProUGUI itemName;        //names of icons
+    public TextMeshProUGUI itemDescription;
 
     void Awake()
     {

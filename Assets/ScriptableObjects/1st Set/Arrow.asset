@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Arrow
   m_EditorClassIdentifier: 
   iconName: Arrow
+  description: Use this with a bow
   iconImage: {fileID: 21300000, guid: 4c1229a2dff2a4342acc737fcf275ab7, type: 3}

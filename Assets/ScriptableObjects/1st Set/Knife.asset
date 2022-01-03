@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Knife
   m_EditorClassIdentifier: 
   iconName: Knife
+  description: Easy to conceal, but low power
   iconImage: {fileID: 21300000, guid: b41e6785793c4764796bd7d9ebbf8fbb, type: 3}

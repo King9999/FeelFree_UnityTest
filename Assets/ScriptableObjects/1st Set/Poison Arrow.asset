@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Poison Arrow
   m_EditorClassIdentifier: 
   iconName: Poison Arrow
+  description: Laced with deadly poison
   iconImage: {fileID: 21300000, guid: 519fd0818f69b6142b2089d56ef86f34, type: 3}

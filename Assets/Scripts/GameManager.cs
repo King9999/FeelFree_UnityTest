@@ -1,17 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] iconObjects;
+    public IconObject[] iconObjects;
     bool iconObjectsInstantiated;
     bool foundItem;                     //if true, cursor is resting on an item.
     int foundItemIndex;                 //used with Pulse couroutine
-    bool pulseCorotuneOn;       
+    bool pulseCoroutineOn;       
     public int MaxIconObjects {get;} = 5;
-    public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
+    public IconObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
     public Menu inventory;
     public Cursor cursor;
@@ -38,7 +37,7 @@ public class GameManager : MonoBehaviour
         lastCursorPosition = cursor.transform.position;
 
         //icon object set up. Each one is instantiated and given random scriptable object data
-        iconObjects = new GameObject[MaxIconObjects];
+        iconObjects = new IconObject[MaxIconObjects];
 
         //Random.InitState(1001);
 
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
         }
 
         //get name of item at current cursor's location
-        inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
+        /*inventory.itemName.text =*/ GetItemNameOnCursor(cursor.transform.position);
 
     }
 
@@ -86,14 +85,7 @@ public class GameManager : MonoBehaviour
         if (lastCursorPosition != cursor.transform.position)
         {
             lastCursorPosition = cursor.transform.position;
-            inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
-
-            //if cursor is resting over an item, the item pulses
-            /*if (foundItem)
-            {
-                //Pulse(iconObjects[foundItemIndex]);
-                pulseCorotuneOn = true;
-            }*/
+            /*inventory.itemName.text =*/ GetItemNameOnCursor(cursor.transform.position);
 
             //was an item picked up?
             if (cursor.itemPickedUp)
@@ -107,31 +99,29 @@ public class GameManager : MonoBehaviour
         /******Pulse coroutine operation*****/
         if (foundItem)
         {
-            if (!pulseCorotuneOn)
+            if (!pulseCoroutineOn)
             {
-                pulseCorotuneOn = true;
+                pulseCoroutineOn = true;
                 StartCoroutine(Pulse(iconObjects[foundItemIndex]));
             }
-        }
-        else
-        {
-            //cursorSr.enabled = true;    //ensures that cursor sprite is enabled when coroutine stops
         }
         /**********************************/
 
     }
 
-    public string GetItemNameOnCursor(Vector3 currentCursorPosition)
+    public void GetItemNameOnCursor(Vector3 currentCursorPosition)
     {
         foundItem = false;
         int i = 0;
-        string itemName = "";
+        inventory.itemName.text = "";
+        inventory.itemDescription.text = "";
         while (!foundItem && i < iconObjects.Length)
         {
-            if (iconObjects[i].activeSelf && currentCursorPosition == iconObjects[i].transform.position)
+            if (iconObjects[i].gameObject.activeSelf && currentCursorPosition == iconObjects[i].transform.position)
             {
-                TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
-                itemName = tm.text;
+                //TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
+                inventory.itemName.text = iconObjects[i].iconName.text;
+                inventory.itemDescription.text = iconObjects[i].iconDescription.text;
                 foundItem = true;
                 foundItemIndex = i;
             }
@@ -142,15 +132,15 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        return itemName;
+        //return itemName;
     }
 
     //Replace an icon game object with a new icon and place it at a random location. Note that
     //no existing objects are deleted to prevent potential garbage collection.
-    public void ResetIconObject(GameObject iconObject, Icon[] icons)
+    public void ResetIconObject(IconObject iconObject, Icon[] icons)
     {
         //enable object in case it was deactivated.
-        iconObject.SetActive(true);
+        iconObject.gameObject.SetActive(true);
 
         //get random scriptable object data
         int randIcon = Random.Range(0, icons.Length);
@@ -158,8 +148,8 @@ public class GameManager : MonoBehaviour
         sr.sprite = icons[randIcon].iconImage;
         sr.sortingOrder = 1;      //icons should appear above the menu sprite.
 
-        TextMeshProUGUI tm = iconObject.GetComponentInChildren<TextMeshProUGUI>();
-        tm.text = icons[randIcon].iconName;
+        iconObject.iconName.text = icons[randIcon].iconName;
+        iconObject.iconDescription.text = icons[randIcon].description;
 
         //search for an empty space in inventory and place item there.
         int randSpace = Random.Range(0, inventory.isOccupied.Length);
@@ -176,9 +166,9 @@ public class GameManager : MonoBehaviour
     }
 
     //This coroutine will increase and decrease an object's scale while the cursor is resting on it.
-    IEnumerator Pulse(GameObject icon)
+    IEnumerator Pulse(IconObject icon)
     {
-        icon.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+        icon.transform.localScale = new Vector3(1.5f, 1.5f, icon.transform.localScale.z);
         float scaleRate = 1f;
 
         while(icon.transform.localScale.x > 1f)
@@ -188,7 +178,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         
-        pulseCorotuneOn = false;
-        icon.transform.localScale = new Vector3(1, 1, 0);
+        pulseCoroutineOn = false;
+        icon.transform.localScale = new Vector3(1, 1, icon.transform.localScale.z);
     }
 }

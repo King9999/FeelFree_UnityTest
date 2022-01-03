@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   iconName: Shovel
+  description: AKA a spade
   iconImage: {fileID: 21300000, guid: ccc6ce1fe9ff7984ca07b31f178fe656, type: 3}

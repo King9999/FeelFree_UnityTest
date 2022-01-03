@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   iconName: Sword
+  description: Standard weapon for heroes
   iconImage: {fileID: 21300000, guid: 090055784fac30e438dc238b48e37a96, type: 3}
