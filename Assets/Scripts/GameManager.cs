@@ -105,13 +105,25 @@ public class GameManager : MonoBehaviour
             {
                 inventory.itemName.text = iconObjects[i].iconName.text;
                 inventory.itemDescription.text = iconObjects[i].iconDescription.text;
-                StartCoroutine(AnimateText(inventory.itemDescription.text));
                 foundItem = true;
                 foundItemIndex = i;
+
+                if (!animateTextCoroutineOn)
+                {
+                    animateTextCoroutineOn = true;
+                    StartCoroutine(AnimateText(0.016f));
+                }
+
             }
             else
             {
                 i++;
+                /*if (animateTextCoroutineOn)
+                {
+                    inventory.itemDescription.text = "";
+                    StopCoroutine(AnimateText(0));
+                    animateTextCoroutineOn = false;                  
+                }*/
             }
         }
     }
@@ -162,12 +174,28 @@ public class GameManager : MonoBehaviour
         icon.transform.localScale = new Vector3(1, 1, icon.transform.localScale.z);
     }
 
-    //Displays given text one letter at a time. Should not run again once the text is fully displayed.
-    IEnumerator AnimateText(string text)
+    //Displays inventory item description text one letter at a time. Should not run again once the text is fully displayed.
+    IEnumerator AnimateText(float scrollSpeed)
     {
-        string copy = text;
-        text = "";
-        yield return null;
+        char[] copy = inventory.itemDescription.text.ToCharArray();
+        inventory.itemDescription.text = "";
+
+        int i = 0;
+        while (i < copy.Length)
+        {
+            if (!foundItem)
+            {
+                inventory.itemDescription.text = "";
+            }
+            else
+            {
+                inventory.itemDescription.text += copy[i];
+            }
+            i++;
+            yield return new WaitForSeconds(scrollSpeed);
+        }
+
+        animateTextCoroutineOn = false;
     }
 #endregion
 }
