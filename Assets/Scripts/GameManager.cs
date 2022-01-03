@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] iconObjects;
     bool iconObjectsInstantiated;
+    bool foundItem;                     //if true, cursor is resting on an item.
+    int foundItemIndex;                 //used with Pulse couroutine
+    bool pulseCorotuneOn;       
     public int MaxIconObjects {get;} = 5;
     public GameObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
@@ -85,18 +88,42 @@ public class GameManager : MonoBehaviour
             lastCursorPosition = cursor.transform.position;
             inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
 
+            //if cursor is resting over an item, the item pulses
+            /*if (foundItem)
+            {
+                //Pulse(iconObjects[foundItemIndex]);
+                pulseCorotuneOn = true;
+            }*/
+
             //was an item picked up?
             if (cursor.itemPickedUp)
             {
                 //update held item's position.
                 iconObjects[cursor.heldItemIndex].transform.position = cursor.transform.position;
             }
+
         }
+
+        /******Pulse coroutine operation*****/
+        if (foundItem)
+        {
+            if (!pulseCorotuneOn)
+            {
+                pulseCorotuneOn = true;
+                StartCoroutine(Pulse(iconObjects[foundItemIndex]));
+            }
+        }
+        else
+        {
+            //cursorSr.enabled = true;    //ensures that cursor sprite is enabled when coroutine stops
+        }
+        /**********************************/
+
     }
 
     public string GetItemNameOnCursor(Vector3 currentCursorPosition)
     {
-        bool foundItem = false;
+        foundItem = false;
         int i = 0;
         string itemName = "";
         while (!foundItem && i < iconObjects.Length)
@@ -106,10 +133,12 @@ public class GameManager : MonoBehaviour
                 TextMeshProUGUI tm = iconObjects[i].GetComponentInChildren<TextMeshProUGUI>();
                 itemName = tm.text;
                 foundItem = true;
+                foundItemIndex = i;
             }
             else
             {
                 i++;
+                foundItem = false;
             }
         }
 
@@ -144,5 +173,22 @@ public class GameManager : MonoBehaviour
 
         //get name of item at current cursor's location in case it changed
         //inventory.itemName.text = GetItemNameOnCursor(cursor.transform.position);
+    }
+
+    //This coroutine will increase and decrease an object's scale while the cursor is resting on it.
+    IEnumerator Pulse(GameObject icon)
+    {
+        icon.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+        float scaleRate = 1f;
+
+        while(icon.transform.localScale.x > 1f)
+        {
+            icon.transform.localScale = new Vector3(icon.transform.localScale.x - scaleRate * Time.deltaTime, icon.transform.localScale.y - scaleRate * Time.deltaTime, 
+                icon.transform.localScale.z);
+            yield return null;
+        }
+        
+        pulseCorotuneOn = false;
+        icon.transform.localScale = new Vector3(1, 1, 0);
     }
 }
