@@ -178,7 +178,31 @@ public class Cursor : MonoBehaviour
                 if (gm.inventory.isOccupied[currentPosition])
                 {
                     //pick up item and replace with previously held item
-                    Debug.Log("Items Swapped");
+                    //find the item to be picked up
+                    int i = 0;
+                    bool itemFound = false;
+                    while(!itemFound && i < gm.iconObjects.Length)
+                    {
+                        if (i != heldItemIndex && gm.iconObjects[i].gameObject.activeSelf && 
+                            gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
+                        {
+                            //found item. Copy its location
+                            IconObject tempObj = gm.iconObjects[i];
+                            //Vector3 tempPos = new Vector3(tempObj.transform.position.x, tempObj.transform.position.y, tempObj.transform.position.z);
+                            //gm.iconObjects[i].transform.position = gm.iconObjects[heldItemIndex].transform.position;
+                            gm.iconObjects[i] = gm.iconObjects[heldItemIndex];
+                            //gm.iconObjects[heldItemIndex].transform.position = tempPos;
+                            gm.iconObjects[heldItemIndex] = tempObj;
+                            //heldItemIndex = i;
+                            itemFound = true;
+                            Debug.Log("Items Swapped");
+                        }
+                        else
+                        {
+                            i++;
+                        }
+                    }
+                    
                 }
                 else
                 {
