@@ -14,9 +14,16 @@ public class GameManager : MonoBehaviour
 
     public Menu inventory;
     public Cursor cursor;
+    public GameObject swapIcon;         //only appears when two icons are overlapping
     Vector3 lastCursorPosition;         //tracks cursor's previous position. Used to check if icon text needs to update.
     public IconManager im = IconManager.instance; 
     public static GameManager instance;
+
+    //temp data
+    public int overlappingObjIndex;     //array location of an icon that is overlapping with another.
+    Vector3 originalPos;                //retains an icon's original position when another icon overlaps with it
+    Vector3 tempPos;                    //temporary position of an inventory icon when it overlaps with another icon
+    bool iconIsOverlapping;             //if true, icon moves to a temporary position.
 
     //coroutine bools
     bool pulseCoroutineOn;
@@ -55,6 +62,9 @@ public class GameManager : MonoBehaviour
         //get name of item at current cursor's location
         GetItemNameOnCursor(cursor.transform.position);
 
+        //swap icon is hidden by default
+        swapIcon.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -76,6 +86,38 @@ public class GameManager : MonoBehaviour
             {
                 //update held item's position.
                 iconObjects[cursor.heldItemIndex].transform.position = cursor.transform.position;
+
+                //is the held item overlapping with an item in inventory?
+                int i = 0;
+                bool iconIsOverlapping = false;
+
+                while(!iconIsOverlapping && i < iconObjects.Length)
+                {
+                    if (i != cursor.heldItemIndex && iconObjects[i].gameObject.activeSelf && 
+                        iconObjects[i].transform.position == iconObjects[cursor.heldItemIndex].transform.position)
+                    {
+                        //shift item so player can see what they're overlapping with
+                        /*overlappingObjIndex = i; 
+                        originalPos = iconObjects[i].transform.position;
+                        tempPos = new Vector3(originalPos.x, originalPos.y + 1, originalPos.z);
+                        iconObjects[i].transform.position = tempPos;*/
+                        iconIsOverlapping = true;
+                        swapIcon.SetActive(true);
+                        swapIcon.transform.position = new Vector3(cursor.transform.position.x + 0.3f, cursor.transform.position.y - 0.3f, cursor.transform.position.z);
+                    }
+                    else
+                    {
+                        i++;
+                        swapIcon.SetActive(false);
+                    }
+                }
+
+                //if item's not overlapping, place it back to original position.
+                if (!iconIsOverlapping)
+                {
+                    //iconObjects[overlappingObjIndex].transform.position = originalPos;
+                    swapIcon.SetActive(false);
+                }
             }
 
         }
@@ -196,6 +238,22 @@ public class GameManager : MonoBehaviour
         }
 
         animateTextCoroutineOn = false;
+    }
+
+     //moves icon in inventory if it overlaps with held icon
+    IEnumerator ShiftIcon(IconObject item)
+    {
+        Vector3 tempPos = new Vector3(item.transform.position.x, item.transform.position.y + 1, item.transform.position.z);
+        Vector3 originalPos = item.transform.position;
+
+        //move item to temporary position
+        //while (/*held item is overlapping with inventory item*/)
+        //{
+            //item.transform.position = tempPos;
+            yield return null;
+        //}
+
+        //item.transform.position = originalPos;
     }
 #endregion
 }

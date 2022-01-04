@@ -174,11 +174,9 @@ public class Cursor : MonoBehaviour
             else
             {
                 //drop item in new space
-                //check if space already occupied. If so, pick up the new item, and old item is placed in space.
+                //check if space already occupied. If so, pick up the new item, and old item is placed in inventory.
                 if (gm.inventory.isOccupied[currentPosition])
                 {
-                    //pick up item and replace with previously held item
-                    //find the item to be picked up
                     int i = 0;
                     bool itemFound = false;
                     while(!itemFound && i < gm.iconObjects.Length)
@@ -186,14 +184,10 @@ public class Cursor : MonoBehaviour
                         if (i != heldItemIndex && gm.iconObjects[i].gameObject.activeSelf && 
                             gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
                         {
-                            //found item. Copy its location
+                            //found item. swap with held item
                             IconObject tempObj = gm.iconObjects[i];
-                            //Vector3 tempPos = new Vector3(tempObj.transform.position.x, tempObj.transform.position.y, tempObj.transform.position.z);
-                            //gm.iconObjects[i].transform.position = gm.iconObjects[heldItemIndex].transform.position;
                             gm.iconObjects[i] = gm.iconObjects[heldItemIndex];
-                            //gm.iconObjects[heldItemIndex].transform.position = tempPos;
                             gm.iconObjects[heldItemIndex] = tempObj;
-                            //heldItemIndex = i;
                             itemFound = true;
                             Debug.Log("Items Swapped");
                         }
@@ -204,7 +198,7 @@ public class Cursor : MonoBehaviour
                     }
                     
                 }
-                else
+                else    //drop item in empty space
                 {
                     itemPickedUp = false;
                     gm.inventory.isOccupied[currentPosition] = true;
@@ -223,4 +217,6 @@ public class Cursor : MonoBehaviour
         yield return new WaitForSeconds(0.08f);
         coroutineRunning = false;
     }
+
+   
 }
