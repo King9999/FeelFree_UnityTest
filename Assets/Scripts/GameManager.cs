@@ -1,16 +1,22 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Icon Data")]
     public IconObject[] iconObjects;
     bool iconObjectsInstantiated;
+    public IconObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
     bool foundItem;                     //if true, cursor is resting on an item.
     int foundItemIndex;                 //used with Pulse couroutine
+
+    enum ScreenResolution {SevenTwenty, TenEighty, FourK}
+    ScreenResolution currentResolution;
+    public TextMeshProUGUI resolutionUI;
+    int screenWidth, screenHeight, refreshRate;
          
-    
-    public IconObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
     public Menu inventory;
     public Cursor cursor;
@@ -20,10 +26,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     //temp data
-    public int overlappingObjIndex;     //array location of an icon that is overlapping with another.
-    Vector3 originalPos;                //retains an icon's original position when another icon overlaps with it
-    Vector3 tempPos;                    //temporary position of an inventory icon when it overlaps with another icon
-    bool iconIsOverlapping;             //if true, icon moves to a temporary position.
+    //public int overlappingObjIndex;     //array location of an icon that is overlapping with another.
+    //Vector3 originalPos;                //retains an icon's original position when another icon overlaps with it
+    //Vector3 tempPos;                    //temporary position of an inventory icon when it overlaps with another icon
+    //bool iconIsOverlapping;             //if true, icon moves to a temporary position.
 
     //coroutine bools
     bool pulseCoroutineOn;
@@ -42,6 +48,14 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+
+        //screen defaults to 720p
+        screenWidth = 1280;
+        screenHeight = 720;
+        refreshRate = 60;
+        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
+        resolutionUI.text = Screen.currentResolution.ToString();
+        Debug.Log(Screen.currentResolution);
     } 
 
     // Start is called before the first frame update
@@ -76,8 +90,6 @@ public class GameManager : MonoBehaviour
     {
         //update cursor position         
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
-
-      
 
         //whenever cursor moves, need to check if cursor is on an item
         if (lastCursorPosition != cursor.transform.position)
@@ -210,6 +222,78 @@ public class GameManager : MonoBehaviour
 
     }
 
+#region Button Controls
+    public void OnLeftShoulderButtonPressed(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            //change screen resolution
+            if (currentResolution <= ScreenResolution.SevenTwenty)
+                currentResolution = ScreenResolution.FourK;
+            else
+                currentResolution--;
+            
+            ChangeResolution(currentResolution);
+            /*switch(currentResolution)
+            {
+                case ScreenResolution.SevenTwenty:
+                    screenWidth = 1280;
+                    screenHeight = 720;
+                    //Screen.SetResolution(1280, 720, FullScreenMode.Windowed, 60);
+                    break;
+
+                case ScreenResolution.TenEighty:
+                    screenWidth = 1920;
+                    screenHeight = 1080;
+                    //Screen.SetResolution(1920, 1080, FullScreenMode.Windowed, 60);
+                    break;
+
+                case ScreenResolution.FourK:
+                    screenWidth = 3860;
+                    screenHeight = 2160;
+                    //Screen.SetResolution(3860, 2160, FullScreenMode.Windowed, 60);
+                    break;
+                
+                default:
+                    break;
+            }
+
+            //update resolution
+            Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
+            resolutionUI.text = Screen.currentResolution.ToString();*/
+        }
+    }
+
+    void ChangeResolution(ScreenResolution resolution)
+    {
+        switch(resolution)
+        {
+            case ScreenResolution.SevenTwenty:
+                screenWidth = 1280;
+                screenHeight = 720;
+                break;
+
+            case ScreenResolution.TenEighty:
+                screenWidth = 1920;
+                screenHeight = 1080;
+                break;
+
+            case ScreenResolution.FourK:
+                screenWidth = 3860;
+                screenHeight = 2160;
+                break;
+            
+            default:
+                break;
+        }
+
+        //update resolution
+        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
+        resolutionUI.text = Screen.currentResolution.ToString();
+    }
+    
+#endregion
+
 #region Coroutines
     //This coroutine will increase and decrease an object's scale while the cursor is resting on it.
     IEnumerator Pulse(IconObject icon)
@@ -233,13 +317,13 @@ public class GameManager : MonoBehaviour
     {
         char[] copy = textToAnimate.ToCharArray();
         inventory.itemDescription.text = "";
-
+        
         int i = 0;
         while (i < copy.Length)
         {
             if (!foundItem)
             {
-                inventory.itemDescription.text = "";
+                inventory.itemDescription.text = "";              
             }
             else
             {

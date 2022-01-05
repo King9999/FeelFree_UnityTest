@@ -1,0 +1,33 @@
+{
+    "name": "Game Manager Input",
+    "maps": [
+        {
+            "name": "Game Manager Controls",
+            "id": "5bb4a12b-3947-4fc2-861f-bdf3243f00b2",
+            "actions": [
+                {
+                    "name": "Change Resolution L",
+                    "type": "Button",
+                    "id": "f6a8bec9-e41e-4676-b84c-b40ee7d9b162",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "952065ef-0723-4825-9acd-707a237963f4",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Change Resolution L",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

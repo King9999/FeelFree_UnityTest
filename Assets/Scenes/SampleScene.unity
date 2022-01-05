@@ -301,6 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1168349206}
   - component: {fileID: 1168349205}
+  - component: {fileID: 1168349207}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -341,6 +342,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168349207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168349204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a90fac8051a378842b844fbe87994151, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7286da83-e68e-4962-8847-262194d61085
+    m_ActionName: Cursor Control/Up[/XInputControllerWindows/dpad/up,/XInputControllerWindows/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f7969a4-d13f-49da-90f5-a5296137f044
+    m_ActionName: Cursor Control/Down[/XInputControllerWindows/dpad/down,/XInputControllerWindows/leftStick/down]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9d15c2e4-0cd8-4eab-b567-b1c7ada3661d
+    m_ActionName: Cursor Control/Left[/XInputControllerWindows/leftStick/left,/XInputControllerWindows/dpad/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e225b17e-a1e4-4480-8de4-c548cdb16561
+    m_ActionName: Cursor Control/Right[/XInputControllerWindows/dpad/right,/XInputControllerWindows/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6321e416-4b5d-4397-8704-74f70c35a6eb
+    m_ActionName: Cursor Control/Reset[/XInputControllerWindows/buttonNorth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b9222150-bcbc-4403-8d65-d037380b2112
+    m_ActionName: Cursor Control/Select Icon[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b6a609fb-7f7c-4cc8-b64c-5cef110610a0
+    m_ActionName: Game Manager Control/Change Resolution R[/XInputControllerWindows/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1168349205}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnLeftShoulderButtonPressed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 45698ac6-6f4a-44fe-ab3b-7705180cab02
+    m_ActionName: Game Manager Control/Change Resolution L[/XInputControllerWindows/leftShoulder]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Game Manager Control
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &1501803234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3205760016080466697, guid: b4a4a83bc8e3f4045a692145dd3fba0c, type: 3}
