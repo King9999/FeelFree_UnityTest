@@ -155,6 +155,7 @@ public class Cursor : MonoBehaviour
                     //find the item to be picked up
                     int i = 0;
                     bool itemFound = false;
+
                     while(!itemFound && i < gm.iconObjects.Length)
                     {
                         if (gm.iconObjects[i].gameObject.activeSelf && gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
@@ -179,15 +180,28 @@ public class Cursor : MonoBehaviour
                 {
                     int i = 0;
                     bool itemFound = false;
+                    SpriteRenderer iconSr = gm.iconObjects[heldItemIndex].GetComponent<SpriteRenderer>();
+
                     while(!itemFound && i < gm.iconObjects.Length)
                     {
                         if (i != heldItemIndex && gm.iconObjects[i].gameObject.activeSelf && 
                             gm.iconObjects[i].transform.position == gm.inventory.inventorySpace[currentPosition].transform.position)
                         {
-                            //found item. swap with held item
+                            //change held item's alpha back to 1 in case it was changed in game manager
+                            iconSr.color = new Color(iconSr.color.r, iconSr.color.g, iconSr.color.b, 1);
+                            iconSr.sortingOrder = gm.DefaultIconSortingLayer;
+
+                            //swap inventory item with held item
                             IconObject tempObj = gm.iconObjects[i];
                             gm.iconObjects[i] = gm.iconObjects[heldItemIndex];
                             gm.iconObjects[heldItemIndex] = tempObj;
+
+                            //reset data for replaced item since its position won't have changed
+                            iconSr = gm.iconObjects[heldItemIndex].GetComponent<SpriteRenderer>();
+                            iconSr.sortingOrder = gm.DefaultIconSortingLayer + 1;
+                            iconSr.color = new Color(iconSr.color.r, iconSr.color.g, iconSr.color.b, 0.4f);
+                            gm.GetItemNameOnCursor(transform.position);
+
                             itemFound = true;
                             Debug.Log("Items Swapped");
                         }

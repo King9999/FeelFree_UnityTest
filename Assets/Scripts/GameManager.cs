@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     bool foundItem;                     //if true, cursor is resting on an item.
     int foundItemIndex;                 //used with Pulse couroutine
          
-    public int MaxIconObjects {get;} = 5;
+    
     public IconObject iconPrefab;       //empty prefab whose copies will contain icon data at runtime.
 
     public Menu inventory;
@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     //coroutine bools
     bool pulseCoroutineOn;
     bool animateTextCoroutineOn;
+
+    //constants
+    public int MaxIconObjects {get;} = 5;
+    public int DefaultIconSortingLayer {get;} = 1;
 
     void Awake()
     {
@@ -90,6 +94,7 @@ public class GameManager : MonoBehaviour
                 //is the held item overlapping with an item in inventory?
                 int i = 0;
                 bool iconIsOverlapping = false;
+                SpriteRenderer iconSr = iconObjects[cursor.heldItemIndex].GetComponent<SpriteRenderer>();
 
                 while(!iconIsOverlapping && i < iconObjects.Length)
                 {
@@ -102,6 +107,11 @@ public class GameManager : MonoBehaviour
                         tempPos = new Vector3(originalPos.x, originalPos.y + 1, originalPos.z);
                         iconObjects[i].transform.position = tempPos;*/
                         iconIsOverlapping = true;
+
+                        //display held over the inventory item so player can see what they're swapping 
+                        iconSr.color = new Color(iconSr.color.r, iconSr.color.g, iconSr.color.b, 0.4f);                       
+                        iconSr.sortingOrder = DefaultIconSortingLayer + 1;   
+
                         swapIcon.SetActive(true);
                         swapIcon.transform.position = new Vector3(cursor.transform.position.x + 0.3f, cursor.transform.position.y - 0.3f, cursor.transform.position.z);
                     }
@@ -115,6 +125,8 @@ public class GameManager : MonoBehaviour
                 //if item's not overlapping, place it back to original position.
                 if (!iconIsOverlapping)
                 {
+                    iconSr.color = new Color(iconSr.color.r, iconSr.color.g, iconSr.color.b, 1);
+                    iconSr.sortingOrder = DefaultIconSortingLayer;
                     //iconObjects[overlappingObjIndex].transform.position = originalPos;
                     swapIcon.SetActive(false);
                 }
@@ -146,14 +158,14 @@ public class GameManager : MonoBehaviour
             if (iconObjects[i].gameObject.activeSelf && currentCursorPosition == iconObjects[i].transform.position)
             {
                 inventory.itemName.text = iconObjects[i].iconName.text;
-                inventory.itemDescription.text = iconObjects[i].iconDescription.text;
+                //inventory.itemDescription.text = iconObjects[i].iconDescription.text;
                 foundItem = true;
                 foundItemIndex = i;
 
                 if (!animateTextCoroutineOn)
                 {
                     animateTextCoroutineOn = true;
-                    StartCoroutine(AnimateText(0.016f));
+                    StartCoroutine(AnimateText(0.016f, iconObjects[i].iconDescription.text));
                 }
 
             }
@@ -181,7 +193,7 @@ public class GameManager : MonoBehaviour
         int randIcon = Random.Range(0, icons.Length);
         SpriteRenderer sr = iconObject.GetComponent<SpriteRenderer>();
         sr.sprite = icons[randIcon].iconImage;
-        sr.sortingOrder = 1;      //icons should appear above the menu sprite.
+        sr.sortingOrder = DefaultIconSortingLayer;      //icons should appear above the menu sprite.
 
         iconObject.iconName.text = icons[randIcon].iconName;
         iconObject.iconDescription.text = icons[randIcon].description;
@@ -217,9 +229,9 @@ public class GameManager : MonoBehaviour
     }
 
     //Displays inventory item description text one letter at a time. Should not run again once the text is fully displayed.
-    IEnumerator AnimateText(float scrollSpeed)
+    IEnumerator AnimateText(float scrollSpeed, string textToAnimate)
     {
-        char[] copy = inventory.itemDescription.text.ToCharArray();
+        char[] copy = textToAnimate.ToCharArray();
         inventory.itemDescription.text = "";
 
         int i = 0;
