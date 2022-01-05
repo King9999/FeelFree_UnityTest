@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +12,7 @@ public class GameManager : MonoBehaviour
     bool foundItem;                     //if true, cursor is resting on an item.
     int foundItemIndex;                 //used with Pulse couroutine
 
+    //screen resolution 
     enum ScreenResolution {SevenTwenty, TenEighty, FourK}
     ScreenResolution currentResolution;
     public TextMeshProUGUI resolutionUI;
@@ -54,8 +54,8 @@ public class GameManager : MonoBehaviour
         //to get the resolution in windowed mode, must must Screen.width/Screen.height.
         screenWidth = 1280;
         screenHeight = 720;
-        refreshRate = 60;
-        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
+        //refreshRate = 60;
+        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed);
     } 
 
     // Start is called before the first frame update
@@ -83,13 +83,18 @@ public class GameManager : MonoBehaviour
         //swap icon is hidden by default
         swapIcon.SetActive(false);
 
+        /*Resolution[] resolutions = Screen.resolutions;
+        foreach (var res in resolutions)
+        {
+            Debug.Log(res);
+        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
         //update screen resolution text
-        resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + refreshRate + "Hz";
+        resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + Screen.currentResolution.refreshRate + "Hz";
 
         //update cursor position         
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
@@ -267,8 +272,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnRightShoulderButtonPressed(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            //change screen resolution
+            if (currentResolution >= ScreenResolution.FourK)
+                currentResolution = ScreenResolution.SevenTwenty;
+            else
+                currentResolution++;
+            
+            ChangeResolution(currentResolution);
+           
+        }
+    }
+
     void ChangeResolution(ScreenResolution resolution)
     {
+        Debug.Log("Current Resolution is " + resolution);
+
         switch(resolution)
         {
             case ScreenResolution.SevenTwenty:
@@ -282,7 +304,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case ScreenResolution.FourK:
-                screenWidth = 3860;
+                screenWidth = 3840;
                 screenHeight = 2160;
                 break;
             
@@ -290,8 +312,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        //update resolution
-        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
+        //update resolution. Warn player if a resolution is not supported.
+        Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed);
         //resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + refreshRate + "Hz";
     }
     
