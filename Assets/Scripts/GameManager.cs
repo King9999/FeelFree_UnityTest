@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,13 +50,12 @@ public class GameManager : MonoBehaviour
 
         instance = this;
 
-        //screen defaults to 720p
+        //screen defaults to 720p. Note that Screen.currenResolution returns the screen data for fullscreen only.
+        //to get the resolution in windowed mode, must must Screen.width/Screen.height.
         screenWidth = 1280;
         screenHeight = 720;
         refreshRate = 60;
         Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
-        resolutionUI.text = Screen.currentResolution.ToString();
-        Debug.Log(Screen.currentResolution);
     } 
 
     // Start is called before the first frame update
@@ -88,6 +88,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //update screen resolution text
+        resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + refreshRate + "Hz";
+
         //update cursor position         
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
 
@@ -289,7 +292,7 @@ public class GameManager : MonoBehaviour
 
         //update resolution
         Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
-        resolutionUI.text = Screen.currentResolution.ToString();
+        //resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + refreshRate + "Hz";
     }
     
 #endregion
