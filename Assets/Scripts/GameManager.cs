@@ -17,7 +17,10 @@ public class GameManager : MonoBehaviour
     ScreenResolution currentResolution;
     public TextMeshProUGUI resolutionUI;
     int screenWidth, screenHeight, refreshRate;
-         
+
+    //particle
+    public GameObject particle;
+    ParticleSystem particlePlayer;     
 
     public Menu inventory;
     public Cursor cursor;
@@ -69,20 +72,26 @@ public class GameManager : MonoBehaviour
         iconObjects = new IconObject[MaxIconObjects];
 
         //Random.InitState(1001);
+         //swap icon is hidden by default
+        swapIcon.SetActive(false);
 
-        for (int i = 0; i < iconObjects.Length; i++)
+        //particle setup. Hidden by default
+        particlePlayer = particle.GetComponent<ParticleSystem>();
+        particle.gameObject.SetActive(false);
+
+        StartCoroutine(SetAllIcons());
+
+        /*for (int i = 0; i < iconObjects.Length; i++)
         {
             iconObjects[i] = Instantiate(iconPrefab);
 
             ResetIconObject(iconObjects[i], im.icons);
-        }
+        }*/
 
         //get name of item at current cursor's location
-        GetItemNameOnCursor(cursor.transform.position);
+        //GetItemNameOnCursor(cursor.transform.position);
 
-        //swap icon is hidden by default
-        swapIcon.SetActive(false);
-
+       
         /*Resolution[] resolutions = Screen.resolutions;
         foreach (var res in resolutions)
         {
@@ -94,7 +103,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //update screen resolution text
-        resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + Screen.currentResolution.refreshRate + "Hz";
+        resolutionUI.text = Screen.width + "x" + Screen.height;
 
         //update cursor position         
         cursor.transform.position = inventory.inventorySpace[cursor.currentPosition].transform.position;
@@ -228,6 +237,12 @@ public class GameManager : MonoBehaviour
         iconObject.transform.position = inventory.inventorySpace[randSpace].transform.position;
         inventory.isOccupied[randSpace] = true;
 
+        //play particle
+        StartCoroutine(PlayParticle(iconObject.transform.position));
+        /*particle.gameObject.SetActive(true);
+        particle.transform.position = iconObject.transform.position;
+        particlePlayer.Play();
+        particle.gameObject.SetActive(false);*/
     }
 
 #region Button Controls
@@ -375,6 +390,29 @@ public class GameManager : MonoBehaviour
         //}
 
         //item.transform.position = originalPos;
+    }
+
+    IEnumerator PlayParticle(Vector3 location)
+    {
+        particle.gameObject.SetActive(true);
+        particle.transform.position = location;
+        particlePlayer.Play();
+        
+        yield return new WaitForSeconds(0.5f);
+        particle.gameObject.SetActive(false);
+    }
+
+    IEnumerator SetAllIcons()
+    {
+        for (int i = 0; i < iconObjects.Length; i++)
+        {
+            iconObjects[i] = Instantiate(iconPrefab);
+
+            ResetIconObject(iconObjects[i], im.icons);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        GetItemNameOnCursor(cursor.transform.position);
     }
 #endregion
 }
