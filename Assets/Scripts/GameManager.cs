@@ -392,7 +392,8 @@ public class GameManager : MonoBehaviour
         //item.transform.position = originalPos;
     }
 
-    IEnumerator PlayParticle(Vector3 location)
+    //particle effect that plays every time an item is placed in inventory.
+    public IEnumerator PlayParticle(Vector3 location)
     {
         particle.gameObject.SetActive(true);
         particle.transform.position = location;
@@ -402,11 +403,13 @@ public class GameManager : MonoBehaviour
         particle.gameObject.SetActive(false);
     }
 
-    IEnumerator SetAllIcons()
+    //This coroutine plays whenever the inventory is reset, and also at the start of the scene.
+    public IEnumerator SetAllIcons()
     {
         for (int i = 0; i < iconObjects.Length; i++)
         {
-            iconObjects[i] = Instantiate(iconPrefab);
+            if (iconObjects[i] == null)
+                iconObjects[i] = Instantiate(iconPrefab);
 
             ResetIconObject(iconObjects[i], im.icons);
             yield return new WaitForSeconds(0.1f);

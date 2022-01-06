@@ -123,10 +123,11 @@ public class Cursor : MonoBehaviour
                 gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
 
                 //replace the current 5 items in inventory with new ones
-                foreach (IconObject icon in gm.iconObjects)
+                /*foreach (IconObject icon in gm.iconObjects)
                 {
                     gm.ResetIconObject(icon, IconManager.instance.icons);
-                }
+                }*/
+                StartCoroutine(gm.SetAllIcons());
 
                 //Update item name on cursor since items have changed.
                 /*gm.inventory.itemName.text =*/ gm.GetItemNameOnCursor(transform.position);
@@ -141,7 +142,7 @@ public class Cursor : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            if (!itemPickedUp /*&& gm.inventory.isOccupied[currentPosition]*/)
+            if (!itemPickedUp)
             {
                 if (gm.inventory.isOccupied[currentPosition])
                 {
@@ -202,6 +203,9 @@ public class Cursor : MonoBehaviour
                             iconSr.color = new Color(iconSr.color.r, iconSr.color.g, iconSr.color.b, 0.4f);
                             gm.GetItemNameOnCursor(transform.position);
 
+                            //play particle effect
+                            StartCoroutine(gm.PlayParticle(transform.position));
+
                             itemFound = true;
                             Debug.Log("Items Swapped");
                         }
@@ -217,6 +221,10 @@ public class Cursor : MonoBehaviour
                     itemPickedUp = false;
                     gm.inventory.isOccupied[currentPosition] = true;
                     cursorBlinking = false;
+
+                    //play particle effect
+                    StartCoroutine(gm.PlayParticle(transform.position));
+
                     gm.GetItemNameOnCursor(transform.position);
                     Debug.Log("Item Dropped");
                 }
