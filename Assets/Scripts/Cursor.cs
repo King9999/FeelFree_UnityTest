@@ -148,6 +148,8 @@ public class Cursor : MonoBehaviour
                 {
                     itemPickedUp = true;
                     gm.inventory.isOccupied[currentPosition] = false;
+                    gm.source.PlayOneShot(gm.pickupItem);
+
                     Debug.Log("Item Picked Up");
 
                     //cursor will blink when item is selected

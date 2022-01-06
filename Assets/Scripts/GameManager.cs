@@ -18,10 +18,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI resolutionUI;
     int screenWidth, screenHeight, refreshRate;
 
+    [Header("Sounds")]
+    public AudioClip pickupItem;    //plays when A button is pressed
+    [HideInInspector]public AudioSource source;
+
     //particle
+    [Header("-----")]
     public GameObject particle;
     ParticleSystem particlePlayer;     
-
+  
     public Menu inventory;
     public Cursor cursor;
     public GameObject swapIcon;         //only appears when two icons are overlapping
@@ -59,6 +64,7 @@ public class GameManager : MonoBehaviour
         screenHeight = 720;
         //refreshRate = 60;
         Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed);
+        
     } 
 
     // Start is called before the first frame update
@@ -79,24 +85,14 @@ public class GameManager : MonoBehaviour
         particlePlayer = particle.GetComponent<ParticleSystem>();
         particle.gameObject.SetActive(false);
 
+        //sound setup
+        source = GetComponent<AudioSource>();
+
+        //icon setup. Cursor is disabled during this time to prevent errors while things are being set up
+        cursor.gameObject.SetActive(false);
         StartCoroutine(SetAllIcons());
 
-        /*for (int i = 0; i < iconObjects.Length; i++)
-        {
-            iconObjects[i] = Instantiate(iconPrefab);
-
-            ResetIconObject(iconObjects[i], im.icons);
-        }*/
-
-        //get name of item at current cursor's location
-        //GetItemNameOnCursor(cursor.transform.position);
-
        
-        /*Resolution[] resolutions = Screen.resolutions;
-        foreach (var res in resolutions)
-        {
-            Debug.Log(res);
-        }*/
     }
 
     // Update is called once per frame
@@ -257,33 +253,7 @@ public class GameManager : MonoBehaviour
                 currentResolution--;
             
             ChangeResolution(currentResolution);
-            /*switch(currentResolution)
-            {
-                case ScreenResolution.SevenTwenty:
-                    screenWidth = 1280;
-                    screenHeight = 720;
-                    //Screen.SetResolution(1280, 720, FullScreenMode.Windowed, 60);
-                    break;
-
-                case ScreenResolution.TenEighty:
-                    screenWidth = 1920;
-                    screenHeight = 1080;
-                    //Screen.SetResolution(1920, 1080, FullScreenMode.Windowed, 60);
-                    break;
-
-                case ScreenResolution.FourK:
-                    screenWidth = 3860;
-                    screenHeight = 2160;
-                    //Screen.SetResolution(3860, 2160, FullScreenMode.Windowed, 60);
-                    break;
-                
-                default:
-                    break;
-            }
-
-            //update resolution
-            Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed, refreshRate);
-            resolutionUI.text = Screen.currentResolution.ToString();*/
+          
         }
     }
 
@@ -327,9 +297,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        //update resolution. Warn player if a resolution is not supported.
+        //update resolution
         Screen.SetResolution(screenWidth, screenHeight, FullScreenMode.Windowed);
-        //resolutionUI.text = Screen.width + "x" + Screen.height + " @ " + refreshRate + "Hz";
     }
     
 #endregion
@@ -414,6 +383,10 @@ public class GameManager : MonoBehaviour
             ResetIconObject(iconObjects[i], im.icons);
             yield return new WaitForSeconds(0.1f);
         }
+
+        //this condition only occurs once after the Start method has finished executing.
+        if (!cursor.gameObject.activeSelf)
+            cursor.gameObject.SetActive(true);
 
         GetItemNameOnCursor(cursor.transform.position);
     }
