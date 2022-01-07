@@ -121,7 +121,8 @@ public class Cursor : MonoBehaviour
                 gm.iconObjects[heldItemIndex].gameObject.SetActive(false);
                 itemPickedUp = false;
                 cursorBlinking = false;
-                //gm.inventory.itemName.text = "";
+                gm.soundSource.PlayOneShot(gm.destroyIcon);
+                StartCoroutine(gm.PlayParticle(transform.position, Color.red));
                 Debug.Log("Item Destroyed");
             }
             else
@@ -213,7 +214,7 @@ public class Cursor : MonoBehaviour
                             gm.GetItemNameOnCursor(transform.position);
 
                             //play particle effect
-                            StartCoroutine(gm.PlayParticle(transform.position));
+                            StartCoroutine(gm.PlayParticle(transform.position, gm.particleColor));
 
                             itemFound = true;
                             Debug.Log("Items Swapped");
@@ -232,7 +233,7 @@ public class Cursor : MonoBehaviour
                     cursorBlinking = false;
 
                     //play particle effect
-                    StartCoroutine(gm.PlayParticle(transform.position));
+                    StartCoroutine(gm.PlayParticle(transform.position, gm.particleColor));
 
                     gm.GetItemNameOnCursor(transform.position);
                     Debug.Log("Item Dropped");

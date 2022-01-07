@@ -22,11 +22,13 @@ public class GameManager : MonoBehaviour
     public AudioClip pickupItem;    //plays when A button is pressed
     public AudioClip cursorSound;        //plays when cursor is moved
     public AudioClip iconReset;     //when inventory is reset and new items are placed
+    public AudioClip destroyIcon;   //when icon is deleted after being selected
     [HideInInspector]public AudioSource soundSource;
 
     //particle
     [Header("-----")]
     public GameObject particle;
+    [HideInInspector]public Color particleColor;
     ParticleSystem particlePlayer;     
   
     public Menu inventory;
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
 
         //particle setup. Hidden by default
         particlePlayer = particle.GetComponent<ParticleSystem>();
+        particleColor = new Color(0.3f, 0.8f, 0.9f);   //light shade of blue
         particle.gameObject.SetActive(false);
 
         //sound setup
@@ -236,7 +239,7 @@ public class GameManager : MonoBehaviour
         inventory.isOccupied[randSpace] = true;
 
         //play particle
-        StartCoroutine(PlayParticle(iconObject.transform.position));
+        StartCoroutine(PlayParticle(iconObject.transform.position, particleColor));
         /*particle.gameObject.SetActive(true);
         particle.transform.position = iconObject.transform.position;
         particlePlayer.Play();
@@ -364,10 +367,12 @@ public class GameManager : MonoBehaviour
     }
 
     //particle effect that plays every time an item is placed in inventory.
-    public IEnumerator PlayParticle(Vector3 location)
+    public IEnumerator PlayParticle(Vector3 location, ParticleSystem.MinMaxGradient color)
     {
         particle.gameObject.SetActive(true);
         particle.transform.position = location;
+        var main = particlePlayer.main;             //why does changing the particle colour have to be done this way?
+        main.startColor = color;
         particlePlayer.Play();
         
         yield return new WaitForSeconds(0.5f);
