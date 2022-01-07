@@ -566,8 +566,12 @@ MonoBehaviour:
   resolutionUI: {fileID: 117254204}
   pickupItem: {fileID: 8300000, guid: 9c3545c85dbd1854995e3e3a4cd4436e, type: 3}
   cursorSound: {fileID: 8300000, guid: 27b89bee294327443b234adc6e3a5a76, type: 3}
-  source: {fileID: 0}
+  iconReset: {fileID: 8300000, guid: d82bfb4c9ab4bd04abf4027f0a172380, type: 3}
+  destroyIcon: {fileID: 8300000, guid: 0430e09f66ea9eb4da3f99c6426b3a72, type: 3}
+  dropIcon: {fileID: 8300000, guid: 9383ea95b27b35b4c84c4ac52d2bba59, type: 3}
+  soundSource: {fileID: 0}
   particle: {fileID: 255758605}
+  particleColor: {r: 0, g: 0, b: 0, a: 0}
   inventory: {fileID: 1534665989}
   cursor: {fileID: 772169991}
   swapIcon: {fileID: 5091208335111984052}
@@ -755,6 +759,18 @@ PrefabInstance:
     - target: {fileID: 337180796662896492, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
       propertyPath: m_Name
       value: ParticleExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227506587049146713, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.9245283
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227506587049146713, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.8168911
+      objectReference: {fileID: 0}
+    - target: {fileID: 4227506587049146713, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.3009078
       objectReference: {fileID: 0}
     - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
       propertyPath: m_RootOrder

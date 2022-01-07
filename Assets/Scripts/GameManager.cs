@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public AudioClip cursorSound;        //plays when cursor is moved
     public AudioClip iconReset;     //when inventory is reset and new items are placed
     public AudioClip destroyIcon;   //when icon is deleted after being selected
+    public AudioClip dropIcon;      //when icon is dropped after picking it up
     [HideInInspector]public AudioSource soundSource;
 
     //particle

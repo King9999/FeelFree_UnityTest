@@ -238,6 +238,9 @@ public class Cursor : MonoBehaviour
                     gm.GetItemNameOnCursor(transform.position);
                     Debug.Log("Item Dropped");
                 }
+
+                //play drop item SFX
+                gm.soundSource.PlayOneShot(gm.dropIcon);
             } 
         }
     }
