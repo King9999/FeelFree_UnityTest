@@ -5,5 +5,5 @@ THINGS TO ADD TO INVENTORY TEST
 3. When an item is dropped into a new space, or when they're generated, there should be a dust effect that spreads outward. *DONE*
 4. add a scrolling background. The scroll effect should be slow so it isn't distracting.
 5. When swapping items, the items should smoothly transition to their new positions. The cursor should not move when this is happening to prevent unintended effects.
-6. Add instructions for each button function. (Use sprites for different buttons using one of the sprite packs I have)
+6. Add instructions for each button function. (Use sprites for different buttons using one of the sprite packs I have)*DONE*
 7. Give each item a short description

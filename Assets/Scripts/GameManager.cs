@@ -336,7 +336,8 @@ public class GameManager : MonoBehaviour
         int i = 0;
         while (i < copy.Length)
         {
-            if (!foundItem)
+            //I want to stop the coroutine when the cursor moves, but stopping it is not working like I hoped, so I tried to clear the text here.
+            if (!foundItem) 
             {
                 inventory.itemDescription.text = "";              
             }

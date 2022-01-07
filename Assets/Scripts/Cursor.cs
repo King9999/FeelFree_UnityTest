@@ -156,7 +156,7 @@ public class Cursor : MonoBehaviour
                 {
                     itemPickedUp = true;
                     gm.inventory.isOccupied[currentPosition] = false;
-                    gm.soundSource.PlayOneShot(gm.pickupItem, 0.5f);
+                    gm.soundSource.PlayOneShot(gm.pickupItem, 0.4f);
 
                     Debug.Log("Item Picked Up");
 
@@ -240,7 +240,7 @@ public class Cursor : MonoBehaviour
                 }
 
                 //play drop item SFX
-                gm.soundSource.PlayOneShot(gm.dropIcon);
+                gm.soundSource.PlayOneShot(gm.dropIcon, 0.4f);
             } 
         }
     }
