@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Sounds")]
     public AudioClip pickupItem;    //plays when A button is pressed
-    [HideInInspector]public AudioSource source;
+    public AudioClip cursorSound;        //plays when cursor is moved
+    public AudioClip iconReset;     //when inventory is reset and new items are placed
+    [HideInInspector]public AudioSource soundSource;
 
     //particle
     [Header("-----")]
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
         particle.gameObject.SetActive(false);
 
         //sound setup
-        source = GetComponent<AudioSource>();
+        soundSource = GetComponent<AudioSource>();
 
         //icon setup. Cursor is disabled during this time to prevent errors while things are being set up
         cursor.gameObject.SetActive(false);
@@ -381,6 +383,7 @@ public class GameManager : MonoBehaviour
                 iconObjects[i] = Instantiate(iconPrefab);
 
             ResetIconObject(iconObjects[i], im.icons);
+            soundSource.PlayOneShot(iconReset, 0.3f);
             yield return new WaitForSeconds(0.1f);
         }
 

@@ -257,6 +257,11 @@ RectTransform:
   m_AnchoredPosition: {x: 123.48999, y: -38.287872}
   m_SizeDelta: {x: 228.9799, y: 45.4243}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &255758605 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 337180796662896492, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+  m_PrefabInstance: {fileID: 1316405552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +541,7 @@ GameObject:
   - component: {fileID: 1168349206}
   - component: {fileID: 1168349205}
   - component: {fileID: 1168349207}
+  - component: {fileID: 1168349208}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -558,6 +564,10 @@ MonoBehaviour:
   iconObjects: []
   iconPrefab: {fileID: 4689620647304965907, guid: ac9121fa30c594f4daba18c79678e6f9, type: 3}
   resolutionUI: {fileID: 117254204}
+  pickupItem: {fileID: 8300000, guid: 9c3545c85dbd1854995e3e3a4cd4436e, type: 3}
+  cursorSound: {fileID: 8300000, guid: 27b89bee294327443b234adc6e3a5a76, type: 3}
+  source: {fileID: 0}
+  particle: {fileID: 255758605}
   inventory: {fileID: 1534665989}
   cursor: {fileID: 772169991}
   swapIcon: {fileID: 5091208335111984052}
@@ -639,6 +649,159 @@ MonoBehaviour:
   m_DefaultActionMap: Game Manager Controls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!82 &1168349208
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168349204}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1001 &1316405552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 337180796662896492, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_Name
+      value: ParticleExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229257323041536023, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8285772f799bb224b9fb55aad61cf6d2, type: 3}
 --- !u!114 &1501803234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3205760016080466697, guid: b4a4a83bc8e3f4045a692145dd3fba0c, type: 3}

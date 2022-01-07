@@ -52,6 +52,8 @@ public class Cursor : MonoBehaviour
                 currentPosition += menu.MaxCols - 1;
             else
                 currentPosition -= 1;
+            
+            gm.soundSource.PlayOneShot(gm.cursorSound);
             Debug.Log("Moving Left");
         }
 
@@ -69,6 +71,7 @@ public class Cursor : MonoBehaviour
             }
             else
                 currentPosition += 1;
+            gm.soundSource.PlayOneShot(gm.cursorSound);
             Debug.Log("Moving Right");
         }
 
@@ -84,6 +87,8 @@ public class Cursor : MonoBehaviour
                 currentPosition += menu.MaxCols * 2;
             else
                 currentPosition -= menu.MaxCols;
+            
+            gm.soundSource.PlayOneShot(gm.cursorSound);
             Debug.Log("Moving Up");
         }
 
@@ -99,6 +104,8 @@ public class Cursor : MonoBehaviour
                 currentPosition -= menu.MaxCols * 2;
             else
                 currentPosition += menu.MaxCols;
+                
+            gm.soundSource.PlayOneShot(gm.cursorSound);
             Debug.Log("Moving Down");
         }
     }
@@ -148,7 +155,7 @@ public class Cursor : MonoBehaviour
                 {
                     itemPickedUp = true;
                     gm.inventory.isOccupied[currentPosition] = false;
-                    gm.source.PlayOneShot(gm.pickupItem);
+                    gm.soundSource.PlayOneShot(gm.pickupItem, 0.5f);
 
                     Debug.Log("Item Picked Up");
 
