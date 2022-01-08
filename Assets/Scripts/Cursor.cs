@@ -55,7 +55,8 @@ public class Cursor : MonoBehaviour
     public void MoveLeft(InputAction.CallbackContext context)
     {
         Vector2 axis = pad.leftStick.ReadValue();
-        if ((axis.x <= -stickThreshold || pad.dpad.left.isPressed) && context.phase == InputActionPhase.Performed)
+        if (((axis.x <= -stickThreshold && Time.time > currentTime + delayTime) || pad.dpad.left.isPressed) && 
+            context.phase == InputActionPhase.Performed)
         {
             currentTime = Time.time;
             //check if cursor is at the edge of the menu and send it to the other side if true
@@ -74,7 +75,8 @@ public class Cursor : MonoBehaviour
     public void MoveRight(InputAction.CallbackContext context)
     {
         Vector2 axis = pad.leftStick.ReadValue();
-        if ((axis.x >= stickThreshold || pad.dpad.right.isPressed) && context.phase == InputActionPhase.Performed)
+        if (((axis.x >= stickThreshold && Time.time > currentTime + delayTime) || pad.dpad.right.isPressed) && 
+            context.phase == InputActionPhase.Performed)
         {
             currentTime = Time.time;
             //check if cursor is at the edge of the menu and send it to the other side if true
@@ -94,7 +96,8 @@ public class Cursor : MonoBehaviour
     public void MoveUp(InputAction.CallbackContext context)
     {
         Vector2 axis = pad.leftStick.ReadValue();
-        if ((axis.y >= stickThreshold || pad.dpad.up.isPressed) && context.phase == InputActionPhase.Performed)
+        if (((axis.y >= stickThreshold && Time.time > currentTime + delayTime) || pad.dpad.up.isPressed) && 
+            context.phase == InputActionPhase.Performed)
         {
             currentTime = Time.time;
             //If cursor is in top row (the first 6 positions in array), add number of columns * 2 to position.
@@ -113,7 +116,8 @@ public class Cursor : MonoBehaviour
     public void MoveDown(InputAction.CallbackContext context)
     {
         Vector2 axis = pad.leftStick.ReadValue();  
-        if ((axis.y <= -stickThreshold || pad.dpad.down.isPressed) && context.phase == InputActionPhase.Performed)
+        if (((axis.y <= -stickThreshold && Time.time > currentTime + delayTime) || pad.dpad.down.isPressed) && 
+            context.phase == InputActionPhase.Performed)
         {
             currentTime = Time.time;
             //If cursor is in bottom row (the last 6 positions in array), subtract number of columns * 2 from position.
