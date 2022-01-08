@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public AudioClip destroyIcon;   //when icon is deleted after being selected
     public AudioClip dropIcon;      //when icon is dropped after picking it up
     [HideInInspector]public AudioSource soundSource;
+    public AudioSource musicSource;
 
     //particle
     [Header("-----")]
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
         cursor.gameObject.SetActive(false);
         StartCoroutine(SetAllIcons());
 
-       
+        musicSource.Play();
     }
 
     // Update is called once per frame
