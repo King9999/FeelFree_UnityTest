@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 17-Wooden Cane
+  m_Name: 26-Jewel
   m_EditorClassIdentifier: 
-  iconName: Wooden Cane
-  description: Has no magical power
-  iconImage: {fileID: 21300000, guid: 77b2d91a728daab49b94ed1187be3f31, type: 3}
+  iconName: Jewel
+  description: Sell for fat stacks
+  iconImage: {fileID: 21300000, guid: 330257bbd1f014a4b8a9254b8bda6acd, type: 3}

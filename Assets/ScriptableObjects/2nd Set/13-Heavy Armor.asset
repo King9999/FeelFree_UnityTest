@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 19-Topaz Ring
+  m_Name: 13-Heavy Armor
   m_EditorClassIdentifier: 
-  iconName: Topaz Ring
-  description: Slightly boosts magic
-  iconImage: {fileID: 21300000, guid: c444dc9e9401fb349a8ecd15fa0f1581, type: 3}
+  iconName: Heavy Armor
+  description: Unbreakable
+  iconImage: {fileID: 21300000, guid: 7f77fc36d63b963418e717ac156df8b9, type: 3}

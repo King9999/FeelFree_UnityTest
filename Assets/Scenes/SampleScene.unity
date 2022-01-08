@@ -548,42 +548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 478448970, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 370.9316
-      objectReference: {fileID: 0}
-    - target: {fileID: 478448970, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 41.3904
-      objectReference: {fileID: 0}
-    - target: {fileID: 478448970, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 41.2756
-      objectReference: {fileID: 0}
-    - target: {fileID: 478448970, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -162.3963
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677995816, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 417.3386
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677995816, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 38.1036
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677995816, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 21.1272
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677995816, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -136.2834
-      objectReference: {fileID: 0}
-    - target: {fileID: 1361134254775468259, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2120567149908856920, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -667,10 +631,6 @@ PrefabInstance:
     - target: {fileID: 2120567149908856920, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4524715459384719639, guid: a09501670d1157b418b46c22d3beba19, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788154118325006881, guid: a09501670d1157b418b46c22d3beba19, type: 3}
       propertyPath: m_Name

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 39-Earth Element
+  m_Name: 48-Bleed Icon
   m_EditorClassIdentifier: 
-  iconName: Earth Element
-  description: Protect the world
-  iconImage: {fileID: 21300000, guid: 2b5167824b458074cb847ae91d5b66cd, type: 3}
+  iconName: Bleed
+  description: Damage over time
+  iconImage: {fileID: 21300000, guid: 5814dfb02f466ad47bf8bcc8826b9fa3, type: 3}

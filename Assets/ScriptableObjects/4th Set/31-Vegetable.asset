@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 11-Coat
+  m_Name: 31-Vegetable
   m_EditorClassIdentifier: 
-  iconName: Coat
-  description: Inexpensive & comfortable
-  iconImage: {fileID: 21300000, guid: 17e6437822b1ba34095fed729a15e4b0, type: 3}
+  iconName: Vegetable
+  description: Better with dressing
+  iconImage: {fileID: 21300000, guid: f74953f697328bb42a093023df628054, type: 3}

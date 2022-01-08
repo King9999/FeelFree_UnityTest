@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 39-Earth Element
+  m_Name: 19-Ring
   m_EditorClassIdentifier: 
-  iconName: Earth Element
-  description: Protect the world
-  iconImage: {fileID: 21300000, guid: 2b5167824b458074cb847ae91d5b66cd, type: 3}
+  iconName: Ring
+  description: Can wear up to two
+  iconImage: {fileID: 21300000, guid: c444dc9e9401fb349a8ecd15fa0f1581, type: 3}

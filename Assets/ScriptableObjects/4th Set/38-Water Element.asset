@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 38-Water Element
   m_EditorClassIdentifier: 
   iconName: Water Element
-  description: Strong vs. Fire
+  description: Drench the world
   iconImage: {fileID: 21300000, guid: c6870f6b7d4487b40b484ddf7fc3f1e3, type: 3}

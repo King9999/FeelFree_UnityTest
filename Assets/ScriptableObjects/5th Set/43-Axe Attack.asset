@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 14-Wooden Shield
+  m_Name: 43-Axe Attack
   m_EditorClassIdentifier: 
-  iconName: Wooden Shield
-  description: Keep it away from fire
-  iconImage: {fileID: 21300000, guid: ecb05b4eba30059409f08ba44657bbca, type: 3}
+  iconName: Axe Attack
+  description: Weak to chopping
+  iconImage: {fileID: 21300000, guid: bd3eb4bb4ffcc4e428fd8af5566dc93c, type: 3}
