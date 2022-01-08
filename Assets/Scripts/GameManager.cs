@@ -46,9 +46,10 @@ public class GameManager : MonoBehaviour
     //Vector3 tempPos;                    //temporary position of an inventory icon when it overlaps with another icon
     //bool iconIsOverlapping;             //if true, icon moves to a temporary position.
 
-    //coroutine bools
+    //coroutine stuff
     bool pulseCoroutineOn;
     bool animateTextCoroutineOn;
+    IEnumerator animateText;
 
     //constants
     public int MaxIconObjects {get;} = 5;
@@ -99,10 +100,12 @@ public class GameManager : MonoBehaviour
         inventory.itemName.text = "";
         inventory.itemDescription.text = "";
 
+
         //icon setup. Cursor is disabled during this time to prevent errors while things are being set up
         cursor.gameObject.SetActive(false);
         StartCoroutine(SetAllIcons());
 
+        //start music
         musicSource.Play();
     }
 
@@ -118,6 +121,13 @@ public class GameManager : MonoBehaviour
         //whenever cursor moves, need to check if cursor is on an item
         if (lastCursorPosition != cursor.transform.position)
         {
+            //stop this coroutine if it's in the middle of running so it can start fresh
+            if (animateTextCoroutineOn)
+            {
+                animateTextCoroutineOn = false;
+                StopCoroutine(animateText);
+            }
+
             lastCursorPosition = cursor.transform.position;
             GetItemNameOnCursor(cursor.transform.position);
 
@@ -170,7 +180,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        /******Pulse coroutine operation*****/
+        //Pulse coroutine operation
         if (foundItem)
         {
             if (!pulseCoroutineOn)
@@ -179,7 +189,6 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(Pulse(iconObjects[foundItemIndex]));
             }
         }
-        /**********************************/
 
     }
 
@@ -194,26 +203,20 @@ public class GameManager : MonoBehaviour
             if (iconObjects[i].gameObject.activeSelf && currentCursorPosition == iconObjects[i].transform.position)
             {
                 inventory.itemName.text = iconObjects[i].iconName.text;
-                //inventory.itemDescription.text = iconObjects[i].iconDescription.text;
                 foundItem = true;
                 foundItemIndex = i;
 
                 if (!animateTextCoroutineOn)
                 {
                     animateTextCoroutineOn = true;
-                    StartCoroutine(AnimateText(0.016f, iconObjects[i].iconDescription.text));
+                    animateText = AnimateText(0.016f, iconObjects[i].iconDescription.text);
+                    StartCoroutine(animateText);
                 }
 
             }
             else
             {
                 i++;
-                /*if (animateTextCoroutineOn)
-                {
-                    inventory.itemDescription.text = "";
-                    StopCoroutine(AnimateText(0));
-                    animateTextCoroutineOn = false;                  
-                }*/
             }
         }
     }
@@ -246,10 +249,7 @@ public class GameManager : MonoBehaviour
 
         //play particle
         StartCoroutine(PlayParticle(iconObject.transform.position, particleColor));
-        /*particle.gameObject.SetActive(true);
-        particle.transform.position = iconObject.transform.position;
-        particlePlayer.Play();
-        particle.gameObject.SetActive(false);*/
+       
     }
 
 #region Button Controls
@@ -340,16 +340,8 @@ public class GameManager : MonoBehaviour
         
         int i = 0;
         while (i < copy.Length)
-        {
-            //I want to stop the coroutine when the cursor moves, but stopping it is not working like I hoped, so I tried to clear the text here.
-            if (!foundItem) 
-            {
-                inventory.itemDescription.text = "";              
-            }
-            else
-            {
-                inventory.itemDescription.text += copy[i];
-            }
+        {           
+            inventory.itemDescription.text += copy[i];
             i++;
             yield return new WaitForSeconds(scrollSpeed);
         }
