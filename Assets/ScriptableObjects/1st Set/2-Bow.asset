@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: Pickaxe
+  m_Name: 2-Bow
   m_EditorClassIdentifier: 
-  iconName: Pickaxe
-  description: Mining tool
-  iconImage: {fileID: 21300000, guid: 9e8b6626c417dfc429a2181587a38025, type: 3}
+  iconName: Bow
+  description: Useless without arrows
+  iconImage: {fileID: 21300000, guid: 0afaa15b4dc6b9048b80e9be35def395, type: 3}

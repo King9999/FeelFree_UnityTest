@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: Poison Arrow
+  m_Name: 19-Topaz Ring
   m_EditorClassIdentifier: 
-  iconName: Poison Arrow
-  description: Laced with deadly poison
-  iconImage: {fileID: 21300000, guid: 519fd0818f69b6142b2089d56ef86f34, type: 3}
+  iconName: Topaz Ring
+  description: Slightly boosts magic
+  iconImage: {fileID: 21300000, guid: c444dc9e9401fb349a8ecd15fa0f1581, type: 3}

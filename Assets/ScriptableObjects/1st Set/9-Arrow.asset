@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: Spear
+  m_Name: 9-Arrow
   m_EditorClassIdentifier: 
-  iconName: Spear
-  description: For midrange combat
-  iconImage: {fileID: 21300000, guid: e3ff35e870ed9d842a0c25c984ff3f2d, type: 3}
+  iconName: Arrow
+  description: Use this with a bow
+  iconImage: {fileID: 21300000, guid: 4c1229a2dff2a4342acc737fcf275ab7, type: 3}

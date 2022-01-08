@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: Arrow
+  m_Name: 14-Wooden Shield
   m_EditorClassIdentifier: 
-  iconName: Arrow
-  description: Use this with a bow
-  iconImage: {fileID: 21300000, guid: 4c1229a2dff2a4342acc737fcf275ab7, type: 3}
+  iconName: Wooden Shield
+  description: Keep it away from fire
+  iconImage: {fileID: 21300000, guid: ecb05b4eba30059409f08ba44657bbca, type: 3}
