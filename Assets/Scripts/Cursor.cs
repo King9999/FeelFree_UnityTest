@@ -14,12 +14,21 @@ public class Cursor : MonoBehaviour
 
     SpriteRenderer cursorSr;                        //used with Blink coroutine.
 
+   //delay timer to prevent rapid input in left stick
+    float delayTime;
+    float currentTime;
+    Gamepad pad;
+    float stickThreshold;        //how far left stick has to move before input is registered
+
     public GameManager gm = GameManager.instance;
 
 
     void Start()
     {
         cursorSr = GetComponent<SpriteRenderer>();
+        delayTime = 0.16f;
+        pad = Gamepad.current;
+        stickThreshold = 0.9f;      //stick may not reach 1.
     }
 
     // Update is called once per frame
@@ -45,8 +54,10 @@ public class Cursor : MonoBehaviour
 
     public void MoveLeft(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        Vector2 axis = pad.leftStick.ReadValue();
+        if ((axis.x <= -stickThreshold || pad.dpad.left.isPressed) && context.phase == InputActionPhase.Performed)
         {
+            currentTime = Time.time;
             //check if cursor is at the edge of the menu and send it to the other side if true
             if (currentPosition <= 0 || currentPosition == menu.MaxCols || currentPosition == menu.MaxCols * 2)
                 currentPosition += menu.MaxCols - 1;
@@ -62,8 +73,11 @@ public class Cursor : MonoBehaviour
 
     public void MoveRight(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        Vector2 axis = pad.leftStick.ReadValue();
+        if ((axis.x >= stickThreshold || pad.dpad.right.isPressed) && context.phase == InputActionPhase.Performed)
         {
+            currentTime = Time.time;
+            //check if cursor is at the edge of the menu and send it to the other side if true
             if (currentPosition == menu.MaxCols - 1 || currentPosition == menu.MaxCols * 2 - 1 
                 || currentPosition == menu.MaxCols * 3 - 1)
             {
@@ -79,8 +93,10 @@ public class Cursor : MonoBehaviour
 
     public void MoveUp(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        Vector2 axis = pad.leftStick.ReadValue();
+        if ((axis.y >= stickThreshold || pad.dpad.up.isPressed) && context.phase == InputActionPhase.Performed)
         {
+            currentTime = Time.time;
             //If cursor is in top row (the first 6 positions in array), add number of columns * 2 to position.
             //otherwise, subtract number of columns from position.
             if (currentPosition < menu.MaxCols)
@@ -96,8 +112,10 @@ public class Cursor : MonoBehaviour
 
     public void MoveDown(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        Vector2 axis = pad.leftStick.ReadValue();  
+        if ((axis.y <= -stickThreshold || pad.dpad.down.isPressed) && context.phase == InputActionPhase.Performed)
         {
+            currentTime = Time.time;
             //If cursor is in bottom row (the last 6 positions in array), subtract number of columns * 2 from position.
             //otherwise, add number of columns to position.
             if (currentPosition >= menu.MaxCols * 2)
