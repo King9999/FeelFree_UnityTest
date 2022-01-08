@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         iconObjects = new IconObject[MaxIconObjects];
 
         //Random.InitState(1001);
-         //swap icon is hidden by default
+        //swap icon is hidden by default
         swapIcon.SetActive(false);
 
         //particle setup. Hidden by default
@@ -93,6 +93,10 @@ public class GameManager : MonoBehaviour
 
         //sound setup
         soundSource = GetComponent<AudioSource>();
+
+        //text setup
+        inventory.itemName.text = "";
+        inventory.itemDescription.text = "";
 
         //icon setup. Cursor is disabled during this time to prevent errors while things are being set up
         cursor.gameObject.SetActive(false);

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b805ee6a881873049851b98e59f65572, type: 3}
-  m_Name: 20-Pendant
+  m_Name: 28-Key
   m_EditorClassIdentifier: 
-  iconName: Pendant
-  description: Key item. Don't drop it!
-  iconImage: {fileID: 21300000, guid: f854a2711ea0ec5429cb2b9c7ccf4c32, type: 3}
+  iconName: Key
+  description: It's a key item. Get it?
+  iconImage: {fileID: 21300000, guid: 3d5554f787c6157419c2c3eabe9c4ab8, type: 3}
