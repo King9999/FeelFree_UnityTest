@@ -150,7 +150,7 @@ public class Cursor : MonoBehaviour
             else
             {
                 //reset inventory space
-                gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
+                //gm.inventory.isOccupied = new bool[gm.inventory.inventorySpace.Length];
 
                 //replace the current 5 items in inventory with new ones
                 /*foreach (IconObject icon in gm.iconObjects)

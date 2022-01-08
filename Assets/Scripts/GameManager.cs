@@ -381,6 +381,9 @@ public class GameManager : MonoBehaviour
     //This coroutine plays whenever the inventory is reset, and also at the start of the scene.
     public IEnumerator SetAllIcons()
     {
+        //reset inventory
+        inventory.isOccupied = new bool[inventory.inventorySpace.Length];
+
         for (int i = 0; i < iconObjects.Length; i++)
         {
             if (iconObjects[i] == null)

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   iconName: Enemy Icon C
   description: Material type
-  iconImage: {fileID: 0}
+  iconImage: {fileID: 21300000, guid: fc2e9a14f1b27a44fbc4718d44ad3fbc, type: 3}
