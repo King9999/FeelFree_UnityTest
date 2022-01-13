@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
 #region Button Controls
     public void OnLeftShoulderButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        /*if (context.phase == InputActionPhase.Performed)
         {
             //change screen resolution
             if (currentResolution <= ScreenResolution.SevenTwenty)
@@ -265,12 +265,12 @@ public class GameManager : MonoBehaviour
             
             ChangeResolution(currentResolution);
           
-        }
+        }*/
     }
 
     public void OnRightShoulderButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        /*if (context.phase == InputActionPhase.Performed)
         {
             //change screen resolution
             if (currentResolution >= ScreenResolution.FourK)
@@ -280,7 +280,7 @@ public class GameManager : MonoBehaviour
             
             ChangeResolution(currentResolution);
            
-        }
+        }*/
     }
 
     void ChangeResolution(ScreenResolution resolution)
